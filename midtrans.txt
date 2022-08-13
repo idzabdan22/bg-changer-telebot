@@ -1,0 +1,98 @@
+
+url: https://api.sandbox.midtrans.com
+endpoint:
+1. Create Payments Link (POST)
+=> /v1/payment-links
+2. Delete Payments Link (DELETE)
+=> /v1/payment-links/{order_id}
+
+
+{
+  transaction_time: '2022-08-12 21:30:13',
+  transaction_status: 'pending',
+  transaction_id: '93b5e80a-4cbb-4437-af9a-65054daae98e',
+  status_message: 'midtrans payment notification',
+  status_code: '201',
+  signature_key: 'f40ddae2620e52f6c52aaf6b9213db8bde037f732c6fd95d6409cf81486527d39bdd3318176615bbd007b30524f34f3ec0afc14e3a99322a1dab07969f7d9ff7',
+  payment_type: 'gopay',
+  order_id: '1660314557992-1660314611520',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}
+{
+  transaction_time: '2022-08-12 21:30:13',
+  transaction_status: 'settlement',
+  transaction_id: '93b5e80a-4cbb-4437-af9a-65054daae98e',
+  status_message: 'midtrans payment notification',
+  status_code: '200',
+  signature_key: '215fd25fac9a57436714171db5205b9f92adb7197721357dcbaa99a599d33dfa63ef7b8e6e46059bb2f4a1ad037f401453d052143879e2c15c2772478ed7b788',
+  settlement_time: '2022-08-12 21:30:54',
+  payment_type: 'gopay',
+  order_id: '1660314557992-1660314611520',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}
+{
+  transaction_time: '2022-08-12 21:25:36',
+  transaction_status: 'expire',
+  transaction_id: '8565a3a8-c0b3-451c-91db-09a89d420e6e',
+  status_message: 'midtrans payment notification',
+  status_code: '202',
+  signature_key: 'de9a34e6a96e4f05b89df96a7e82b5482f441db6627c85cf1eb0eb6ee7442334d75a359f0be0e60a13f04d297d19eb4764cd0d6cdd293587f567af5b3ef7fd51',
+  payment_type: 'gopay',
+  order_id: '1660314271023-1660314334708',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}
+//////////////////////////////////////////////////
+using regex
+{
+  transaction_time: '2022-08-13 14:28:25',
+  transaction_status: 'pending',
+  transaction_id: '5d558111-f86a-4969-8a1f-f8cb6e5d7805',
+  status_message: 'midtrans payment notification',
+  status_code: '201',
+  signature_key: '83faa43e9fe2f8a2cad4fdf2615602a435319109569634a6157d3387eccb6a6c67672877113f0f39d8a3feb1a3a63ccfdcf0cd3b445219693842e9db354446a2',
+  payment_type: 'gopay',
+  order_id: '1660375330372-1660375699821',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}
+{
+  transaction_time: '2022-08-13 14:28:25',
+  transaction_status: 'settlement',
+  transaction_id: '5d558111-f86a-4969-8a1f-f8cb6e5d7805',
+  status_message: 'midtrans payment notification',
+  status_code: '200',
+  signature_key: '954b45d0ac0be2fcd0aea0bc412e54c9423e21b9e0071f57314cb3c0a41a18cd914731bf2794cb61ab17c965455982bddbdb8e41108a64aa4d3fd5774dfda1d5',
+  settlement_time: '2022-08-13 14:29:36',
+  payment_type: 'gopay',
+  order_id: '1660375330372-1660375699821',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}
+/// unpayed link
+{
+  transaction_time: '2022-08-13 14:21:20',
+  transaction_status: 'expire',
+  transaction_id: '61ff5276-b643-4c2d-a998-2b9b2bbfa2a5',
+  status_message: 'midtrans payment notification',
+  status_code: '202',
+  signature_key: 'c97ebf2d2af11140cb60b7614e22db2c57c66330ea4b82bae26a67838ff1ab5904159325b85075e89817bab4a6f888e2473dd79d0d15d0b796091ec7c6c1401b',
+  payment_type: 'gopay',
+  order_id: '1660375103677-1660375279347',
+  merchant_id: 'G932801572',
+  gross_amount: '2000.00',
+  fraud_status: 'accept',
+  currency: 'IDR'
+}

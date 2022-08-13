@@ -12,3 +12,5 @@ const getFilePath = async (file_id) => {
     throw new CustomError("Telegram Server Error", 500);
   }
 };
+
+module.exports = getFilePath;

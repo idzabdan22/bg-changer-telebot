@@ -18,11 +18,13 @@ const sendPhoto = async (chat_id, local_file_path) => {
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendPhoto`,
       teleForm
     );
-    return res;
+    return res.status;
   } catch (error) {
     throw new CustomError("Telegram Server Error", 500);
   }
 };
+
+module.exports = sendPhoto;
 //   .then((response) => {
 //     // fs.unlink(path, (err) => {
 //     //   if (err) return console.log(err);

@@ -5,7 +5,6 @@ const fs = require("fs");
 const CustomError = require("../utils/CustomError");
 require("dotenv").config();
 
-
 const sendDocument = async (chat_id, local_file_path) => {
   try {
     const teleForm = new FormData();
@@ -19,8 +18,10 @@ const sendDocument = async (chat_id, local_file_path) => {
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendDocument`,
       teleForm
     );
-    return res;
+    return res.status;
   } catch (error) {
     throw new CustomError("Telegram Server Error", 500);
   }
 };
+
+module.exports = sendDocument;

@@ -6,6 +6,7 @@ const axios = require("axios");
 const app = express();
 const Path = require("path");
 const fs = require("fs");
+const fsAsync = require('fs/promises')
 const FormData = require("form-data");
 const { send } = require("process");
 require("dotenv").config();
@@ -47,7 +48,15 @@ async function processBackroundPhoto(chat_id, data) {
     })
       .then((response) => {
         if (response.status != 200);
+        console.log("PROCESSING SAVING");
+        // fsAsync.writeFile(path, response.data).then((res) => {
+        //   return console.log("SUCESSS");
+        // }).catch((err) => {
+        //   return console.log("ERROR");
+        // })
         fs.writeFileSync(path, response.data);
+        
+        return console.log("PROVE THAT ASYNC");
         const teleForm = new FormData();
         teleForm.append("chat_id", chat_id);
         teleForm.append(

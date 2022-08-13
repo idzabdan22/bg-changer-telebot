@@ -3,6 +3,10 @@ const sendPhoto = require("./sendPhotoTele");
 const removeBackground = require("./removeBackground");
 const getTelegramFilePath = require("./getTeleFilePath");
 const sendMessage = require("./sendMessageTele");
+const callbackQueryHandler = require("./callbackQueryHandler");
+const checkUser = require("./checkUser");
+const registerUser = require("./registerUser");
+const apiKeyGenerator = require("./apikeyChanger");
 
 module.exports = {
   sendDocument,
@@ -10,4 +14,8 @@ module.exports = {
   sendMessage,
   removeBackground,
   getTelegramFilePath,
+  callbackQueryHandler,
+  checkUser,
+  registerUser,
+  apiKeyGenerator,
 };
