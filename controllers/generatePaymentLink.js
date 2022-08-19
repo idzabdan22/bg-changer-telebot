@@ -29,6 +29,7 @@ const generatePaymentLink = async (resData) => {
       credit = 28;
       amount = 10000.0;
     }
+    
     const data = {
       transaction_details: {
         order_id: `${uuidv4()}`,
@@ -57,6 +58,8 @@ const generatePaymentLink = async (resData) => {
       custom_field2: "custom field 2 content",
       custom_field3: "custom field 3 content",
     };
+
+    if (payment_method.length) data.enabled_payments = payment_method;
 
     const res = await axios.post(
       "https://api.midtrans.com/v1/payment-links",

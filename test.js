@@ -109,9 +109,12 @@
 
 // console.log(new Date(1660314611520));
 
-
 const dates = new Date();
-console.log(dates)
-console.log(dates.toISOString())
-console.log(dates.toLocaleString())
-console.log(dates.getTime()) //Millisecond since 1 january 1970
+console.log(dates);
+console.log(dates.toISOString());
+console.log(dates.toLocaleString());
+console.log(dates.getTime()); //Millisecond since 1 january 1970
+
+const pay = [];
+
+if (pay.length) console.log(pay);
