@@ -51,6 +51,6 @@ app.post("/payment/unfinish", async (req, res) => {
   res.send("OKEEEEEEEE");
 });
 
-app.listen(process.env.PORT, "localhost", () => {
+app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
   console.log(`LISTENING ON PORT ${process.env.PORT}`);
 });
