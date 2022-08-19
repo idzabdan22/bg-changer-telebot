@@ -14,7 +14,6 @@ const axiosConfig = {
 
 const generatePaymentLink = async (resData) => {
   try {
-    console.log("MASUKKKK");
     let amount = 0;
     let payment_method = [];
     let credit = 0;
@@ -45,7 +44,7 @@ const generatePaymentLink = async (resData) => {
         duration: 30,
         unit: "minutes",
       },
-      enabled_payments: payment_method,
+      // enabled_payments: payment_method,
       item_details: [
         {
           name: `: ${credit} Credit`,

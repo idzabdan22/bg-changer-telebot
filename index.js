@@ -26,7 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("HELLO WORLD");
+  res.status(200).send({
+    message: "OK, There is nothing to do...",
+  });
 });
 
 app.post("/", async (req, res) => {
