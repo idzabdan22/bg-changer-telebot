@@ -25,12 +25,12 @@ const callbackQueryHandler = async (response) => {
       response.data === "gp6k" ||
       response.data === "gpbt10k"
     ) {
-      console.log(response.data);
+      
       sendMessage({
         chat_id: id,
         text: "Generating payment link...",
       });
-      const payment_link = await generatePaymentLink(response.data);
+      const payment_link = await generatePaymentLink(response.message);
       await sendMessage({
         chat_id: id,
         text: `${payment_link}`,

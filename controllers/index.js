@@ -9,6 +9,7 @@ const registerUser = require("./registerUser");
 const apiKeyGenerator = require("./apikeyChanger");
 const processCommand = require("./processCommand");
 const processDocOrPhotoData = require("./processDocOrPhotoData");
+const paymentHandling = require("./paymentHandling");
 
 module.exports = {
   sendDocument,
@@ -22,4 +23,5 @@ module.exports = {
   apiKeyGenerator,
   processCommand,
   processDocOrPhotoData,
+  paymentHandling,
 };

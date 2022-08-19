@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { v4: uuidv4 } = require("uuid");
-
+const { User, Transaction } = require("../model");
 const {
   getSandBoxHeader,
   getProductionHeader,
@@ -12,16 +12,16 @@ const axiosConfig = {
   headers: getProductionHeader(),
 };
 
-const generatePaymentLink = async (resData) => {
+const generatePaymentLink = async (responseData) => {
   try {
     let amount = 0;
     let payment_method = [];
     let credit = 0;
-    if (resData === "gp2k") {
+    if (responseData.data === "gp2k") {
       amount = 2000.0;
       credit = 5;
       payment_method.push("gopay");
-    } else if (resData === "gp6k") {
+    } else if (responseData.data === "gp6k") {
       amount = 6000.0;
       credit = 17;
       payment_method.push("gopay");
@@ -29,12 +29,12 @@ const generatePaymentLink = async (resData) => {
       credit = 28;
       amount = 10000.0;
     }
-    
+    const userOrderId = uuidv4();
     const data = {
       transaction_details: {
-        order_id: `${uuidv4()}`,
+        order_id: userOrderId,
         gross_amount: amount,
-        payment_link_id: `${uuidv4()}`,
+        payment_link_id: userOrderId,
       },
       credit_card: {
         secure: true,
@@ -45,7 +45,6 @@ const generatePaymentLink = async (resData) => {
         duration: 30,
         unit: "minutes",
       },
-      // enabled_payments: payment_method,
       item_details: [
         {
           name: `: ${credit} Credit`,
@@ -55,8 +54,6 @@ const generatePaymentLink = async (resData) => {
         },
       ],
       custom_field1: "custom field 1 content",
-      custom_field2: "custom field 2 content",
-      custom_field3: "custom field 3 content",
     };
 
     if (payment_method.length) data.enabled_payments = payment_method;
@@ -66,12 +63,28 @@ const generatePaymentLink = async (resData) => {
       data,
       axiosConfig
     );
-    console.log(res.data);
+
+    const transaction = new Transaction({
+      transaction_id: "",
+      transaction_time: "",
+      transaction_status: "",
+      gross_amount: amount,
+      currency: "IDR",
+      order_id_prefix: userOrderId,
+      owner: responseData.message.chat.id,
+      payment_status: "",
+      order_id: "",
+    });
+
+    const user = await User.findById(responseData.message.chat.id);
+    user.transaction_history = transaction;
+    await user.save();
+    await transaction.save();
+
     return res.data.payment_url;
   } catch (error) {
     console.log(error);
     throw error;
-    // console.log(error);
   }
 };
 

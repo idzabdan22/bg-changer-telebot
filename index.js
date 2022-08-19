@@ -8,6 +8,7 @@ const {
   callbackQueryHandler,
   processCommand,
   processDocOrPhotoData,
+  paymentHandling,
 } = require("./controllers");
 require("dotenv").config();
 
@@ -47,8 +48,14 @@ app.post("/", async (req, res) => {
 });
 
 app.post("/payment/handling", async (req, res) => {
-  console.log(req.body);
-  res.send("OKEEEEEEEE");
+  try {
+    await paymentHandling(req.body);
+    res.status(200).send({ message: "ok" });
+  } catch (error) {
+    res.status(500).send({ message: "internal server error" });
+  }
+  // console.log(req.body);
+  // res.send("OKEEEEEEEE");
 });
 
 app.post("/payment/unfinish", async (req, res) => {
