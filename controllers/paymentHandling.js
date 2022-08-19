@@ -2,7 +2,7 @@ const { Transaction } = require("../model");
 
 const paymentHandling = async (responseData) => {
     try {
-        console.log(responseData.id);
+        console.log(responseData.order_id);
         return;
     } catch (error) {
         
