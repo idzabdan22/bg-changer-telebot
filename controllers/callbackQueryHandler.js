@@ -30,7 +30,7 @@ const callbackQueryHandler = async (response) => {
         chat_id: id,
         text: "Generating payment link...",
       });
-      const payment_link = await generatePaymentLink(response.message);
+      const payment_link = await generatePaymentLink(response);
       await sendMessage({
         chat_id: id,
         text: `${payment_link}`,
