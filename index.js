@@ -25,6 +25,10 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("HELLO WORLD");
+});
+
 app.post("/", async (req, res) => {
   try {
     const callbackQuery = req.body.callback_query;
