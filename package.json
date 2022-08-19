@@ -7,6 +7,10 @@
     "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  },
   "author": "abdan",
   "license": "MIT",
   "dependencies": {
