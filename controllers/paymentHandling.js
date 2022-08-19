@@ -5,6 +5,7 @@ const paymentHandling = async (responseData) => {
     console.log(responseData.order_id);
     const rawOrderId = responseData.order_id;
     const orderId = rawOrderId.slice(0, rawOrderId.lastIndexOf("-"));
+    console.log(orderId);
     const transaction = await Transaction.find({
       order_id: orderId,
     });
