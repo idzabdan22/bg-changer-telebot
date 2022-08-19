@@ -22,10 +22,9 @@ const registerUser = async (userData) => {
       language_code: language_code,
     });
 
-    await user.save();
-    return 200;
+    return await user.save();
   } catch (error) {
-    next();
+    throw err;
   }
 };
 

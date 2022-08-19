@@ -10,7 +10,8 @@ const sendMessage = async (data) => {
     );
     return res;
   } catch (error) {
-    throw new CustomError("Telegram Server Error", 500);
+    console.log(error);
+    // throw new CustomError("Telegram Server Error", 500);
   }
 };
 

@@ -1,6 +1,9 @@
-const axios = require("axios");
 const sendMessage = require("./sendMessageTele");
 const checkUser = require("./checkUser");
+const callbackQueryHandler = require("./callbackQueryHandler");
+const userInfo = require("./userInfo");
+const userHistory = require("./showHistory");
+const buyCredit = require("./buyCredit");
 
 const processCommand = async (chatData) => {
   try {
@@ -20,8 +23,13 @@ const processCommand = async (chatData) => {
           });
           break;
         case "/info":
+          await userInfo(id);
+          break;
+        case "/history":
+          // await userHistory(id);
           break;
         case "/buyCredit":
+          await buyCredit(id);
           break;
         case "/transactionStatus":
           break;
@@ -32,14 +40,11 @@ const processCommand = async (chatData) => {
       }
     } else {
       if (message.match(/[a-fA-F0-9]+((?![\w,]))/g)) {
-        await sendMessage({
-          chat_id: chatData.message.chat.id,
-          text: "Processing, it may take a while...",
-        });
+        await callbackQueryHandler(chatData);
       }
     }
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

@@ -1,13 +1,4 @@
-const removeBackground = require("./removeBackground");
-const sendMessage = require("./sendMessageTele");
-const axios = require("axios");
-const fs = require("fs");
-const mongoose = require("mongoose");
-const { User, Data, History, Apikey } = require("../model");
-const Path = require("path");
-const sendDocument = require("./sendDocTele");
-const sendPhoto = require("./sendPhotoTele");
-require("dotenv").config();
+const Apikey = require("../model");
 
 const apiKeyGenerator = async () => {
   try {
@@ -16,7 +7,7 @@ const apiKeyGenerator = async () => {
     });
     return res[0];
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

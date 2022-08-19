@@ -62,49 +62,56 @@
 // //   .then((response) => {
 // //       if(response.status != 200);
 // //     console.log("SUCCESSS", response.data);
-// //       fs.writeFileSync("no-bg1.png", response.data);
-// //   })
-// //   .catch((error) => {
-// //     console.log("ERROR");
-// //     // return console.error('Request failed:', error);
-// //   });
+// // //       fs.writeFileSync("no-bg1.png", response.data);
+// // //   })
+// // //   .catch((error) => {
+// // //     console.log("ERROR");
+// // //     // return console.error('Request failed:', error);
+// // //   });
 
-// const randomNum = Math.floor(Math.random() * 6);
-// console.log(randomNum);
+// // const randomNum = Math.floor(Math.random() * 6);
+// // console.log(randomNum);
 
-console.log(process.cwd());
+// console.log(process.cwd());
 
-const test = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("HI IM ASYNC");
-      console.log("AFTER ASYNC 3 sec");
-    }, 3000);
-  });
-};
+// const test = async () => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("HI IM ASYNC");
+//       console.log("AFTER ASYNC 3 sec");
+//     }, 3000);
+//   });
+// };
 
-function an() {
-  test();
-}
+// function an() {
+//   test();
+// }
 
-an();
-console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOO");
+// an();
+// console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOO");
 
-const {
-  getProductionHeader,
-  getSandBoxHeader,
-} = require("./config/midtransHeaderConfig");
-const generateOrderId = require("./utils/generateOrderId");
+// const {
+//   getProductionHeader,
+//   getSandBoxHeader,
+// } = require("./config/midtransHeaderConfig");
+// const generateOrderId = require("./utils/generateOrderId");
 
-console.log(getProductionHeader());
+// console.log(getProductionHeader());
 
-console.log(generateOrderId(1235554));
+// console.log(generateOrderId(1235554));
 
-console.log(new Date().toUTCString());
-console.log(new Date().toLocaleDateString());
-console.log(new Date().toISOString());
 // console.log(new Date().toUTCString());
+// console.log(new Date().toLocaleDateString());
+// console.log(new Date().toISOString());
+// // console.log(new Date().toUTCString());
 
-console.log(new Date(1660385098455));
+// console.log(new Date(1660385098455));
 
 // console.log(new Date(1660314611520));
+
+
+const dates = new Date();
+console.log(dates)
+console.log(dates.toISOString())
+console.log(dates.toLocaleString())
+console.log(dates.getTime()) //Millisecond since 1 january 1970

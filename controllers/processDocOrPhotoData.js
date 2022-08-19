@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { History, User } = require("../model");
 const sendMessage = require("./sendMessageTele");
 const getTelegramFilePath = require("./getTeleFilePath");
@@ -82,7 +81,7 @@ const processDocOrPhotoData = async (data) => {
       });
       await sendMessage({
         chat_id: id,
-        text: "Or type the hex color code (ex: 81d4fa) / the color name (ex: purple)",
+        text: "Or type the hex color code (ex: 81d4fa, fff).",
       });
     }
   } catch (error) {

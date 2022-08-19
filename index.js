@@ -3,34 +3,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const axios = require("axios");
 const app = express();
-const Path = require("path");
-const { User, Data, History } = require("./model");
 const {
-  sendMessage,
-  getTelegramFilePath,
   callbackQueryHandler,
-  checkUser,
+  processCommand,
+  processDocOrPhotoData,
 } = require("./controllers");
-const processCommand = require("./controllers/processCommand");
-const processDocOrPhotoData = require("./controllers/processPhotoData");
-
 require("dotenv").config();
-
-(async () => {
-  try {
-    await axios.post(
-      `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/setWebhook`,
-      {
-        url: "https://653a-158-140-175-221.ngrok.io",
-      }
-    );
-    console.log("SUCCESS FORWARDING");
-  } catch (e) {
-    console.log(e);
-  }
-})();
 
 const dbUrl = process.env.DB || "mongodb://127.0.0.1:27017/bg-changer-telebot";
 
@@ -55,9 +34,9 @@ app.post("/", async (req, res) => {
       !isMessage?.text
         ? await processDocOrPhotoData(req.body)
         : await processCommand(req.body);
-    res.status(200).send({ message: "OK" });
+    res.status(200).send({ message: "ok" });
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" });
+    res.status(500).send({ message: "internal server error" });
   }
 });
 
