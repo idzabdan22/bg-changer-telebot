@@ -7,7 +7,7 @@ const paymentHandling = async (responseData) => {
     const orderId = rawOrderId.slice(0, rawOrderId.lastIndexOf("-"));
     console.log(orderId);
     const transaction = await Transaction.find({
-      order_id: orderId,
+      order_id_prefix: orderId,
     });
     console.log(transaction);
     return;
