@@ -17,9 +17,6 @@ const transactionSchema = new Schema({
   transaction_status: {
     type: String,
   },
-  order_id_prefix: {
-    type: String,
-  },
   order_id: {
     type: String,
   },

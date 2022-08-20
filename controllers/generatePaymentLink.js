@@ -70,10 +70,9 @@ const generatePaymentLink = async (responseData) => {
       transaction_status: "",
       gross_amount: amount,
       currency: "IDR",
-      order_id_prefix: userOrderId,
       owner: responseData.message.chat.id,
       payment_status: "",
-      order_id: "",
+      order_id: userOrderId,
     });
 
     const user = await User.findById(responseData.message.chat.id);
