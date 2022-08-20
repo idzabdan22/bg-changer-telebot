@@ -76,9 +76,9 @@ const generatePaymentLink = async (responseData) => {
     });
 
     const user = await User.findById(responseData.message.chat.id);
-    user.transaction_history = transaction;
-    await user.save();
+    user.transaction_history.push(transaction);
     await transaction.save();
+    await user.save();
 
     return res.data.payment_url;
   } catch (error) {
