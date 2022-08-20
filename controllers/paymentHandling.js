@@ -2,6 +2,7 @@ const { Transaction } = require("../model");
 
 const paymentHandling = async (responseData) => {
   try {
+    console.log(responseData);
     console.log(responseData.order_id);
     const rawOrderId = responseData.order_id;
     const orderId = rawOrderId.slice(0, rawOrderId.lastIndexOf("-"));
