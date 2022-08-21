@@ -25,7 +25,6 @@ const callbackQueryHandler = async (response) => {
       response.data === "gp6k" ||
       response.data === "gpbt10k"
     ) {
-      
       sendMessage({
         chat_id: id,
         text: "Generating payment link...",
@@ -54,10 +53,19 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
+
     await sendMessage({
       chat_id: id,
       text: "Processing, it may take a while...",
     });
+
+    if (cbId)
+      await axios.post(
+        `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
+        {
+          callback_query_id: cbId,
+        }
+      );
 
     const bg_color = response.data || response.message.text;
     console.log(bg_color);
