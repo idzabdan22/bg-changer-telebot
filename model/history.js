@@ -17,6 +17,9 @@ const historySchema = new Schema({
   file_type: {
     type: String,
   },
+  width_pixel_size: {
+    type: Number,
+  },
 });
 
 module.exports = model("History", historySchema);
