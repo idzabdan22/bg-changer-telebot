@@ -42,6 +42,7 @@ const callbackQueryHandler = async (response) => {
       );
       return;
     }
+    
     if (!(await userCreditCheck(id))) {
       if (cbId) {
         await axios.post(
@@ -53,24 +54,26 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
+    // return;
 
     await sendMessage({
       chat_id: id,
       text: "Processing, it may take a while...",
     });
 
-    if (cbId)
-      await axios.post(
-        `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-        {
-          callback_query_id: cbId,
-        }
-      );
+    // if (cbId)
+    //   await axios.post(
+    //     `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
+    //     {
+    //       callback_query_id: cbId,
+    //     }
+    //   );
 
+    console.log(response.data, response.message.text);
     const bg_color = response.data || response.message.text;
     console.log(bg_color);
     const user = await User.findById(id);
-    const history = await History.findByIdAndUpdate(
+    const history = await History.findById(
       user.history[user.history.length - 1]
     );
     history.background_color = bg_color;
@@ -83,6 +86,9 @@ const callbackQueryHandler = async (response) => {
     );
     const path = `${process.cwd()}/photos/${id}.${file_extension}`;
     const apiKey = await apiKeyGenerator();
+
+    console.log(apiKey);
+    // return;
 
     const api_data = await Apikey.findById(apiKey._id);
 
@@ -105,12 +111,6 @@ const callbackQueryHandler = async (response) => {
     await user.save();
     return;
   } catch (err) {
-    axios.post(
-      `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-      {
-        callback_query_id: cbId,
-      }
-    );
     console.log(err);
     throw err;
   }

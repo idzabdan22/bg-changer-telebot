@@ -11,6 +11,9 @@ const transactionSchema = new Schema({
   gross_amount: {
     type: Number,
   },
+  credit_amount: {
+    type: Number,
+  },
   currency: {
     type: String,
   },

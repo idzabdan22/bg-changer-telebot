@@ -1,4 +1,4 @@
-const { Transaction } = require("../model");
+const { Transaction, User } = require("../model");
 
 const paymentHandling = async (responseData) => {
   try {
@@ -10,6 +10,7 @@ const paymentHandling = async (responseData) => {
     const transaction = await Transaction.findOne({
       order_id: orderId,
     });
+    const user = await User.findById(transaction.owner);
     transaction.transaction_time = responseData.transaction_time;
     transaction.transaction_id = responseData.transaction_id;
     transaction.currency = responseData.currency;
@@ -36,6 +37,7 @@ const paymentHandling = async (responseData) => {
       }
     } else if (transactionStatus == "settlement") {
       transaction.payment_status = "success";
+      user.credit = transaction.credit_amount;
       // TODO set transaction status on your database to 'success'
       // and response with 200 OK
     } else if (
@@ -53,6 +55,7 @@ const paymentHandling = async (responseData) => {
     }
 
     await transaction.save();
+    await user.save();
 
     console.log(transaction);
     return;

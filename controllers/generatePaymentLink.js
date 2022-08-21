@@ -73,6 +73,7 @@ const generatePaymentLink = async (responseData) => {
       owner: responseData.message.chat.id,
       payment_status: "",
       order_id: userOrderId,
+      credit_amount: credit,
     });
 
     const user = await User.findById(responseData.message.chat.id);
