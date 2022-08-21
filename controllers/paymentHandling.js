@@ -37,7 +37,7 @@ const paymentHandling = async (responseData) => {
       }
     } else if (transactionStatus == "settlement") {
       transaction.payment_status = "success";
-      user.credit = transaction.credit_amount;
+      user.credit += transaction.credit_amount;
       // TODO set transaction status on your database to 'success'
       // and response with 200 OK
     } else if (
