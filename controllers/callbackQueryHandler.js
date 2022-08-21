@@ -42,7 +42,7 @@ const callbackQueryHandler = async (response) => {
       );
       return;
     }
-    
+
     if (!(await userCreditCheck(id))) {
       if (cbId) {
         await axios.post(
@@ -54,7 +54,7 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
-    // return;
+    return;
 
     await sendMessage({
       chat_id: id,
