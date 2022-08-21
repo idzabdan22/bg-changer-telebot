@@ -104,14 +104,19 @@ const callbackQueryHandler = async (response) => {
 
     fs.writeFileSync(path, bufferData);
 
-    sharp(path)
-      .resize(2048)
-      .toBuffer()
-      .then((data) => {
-        fs.writeFileSync(path, data);
-      });
+    // sharp(path)
+    //   .resize(2048)
+    //   .toBuffer()
+    //   .then((data) => {});
 
-    
+    const resizedImage = await sharp({
+      create: {
+        width: 2048,
+      },
+    }).toBuffer();
+
+    fs.writeFileSync(path, resizedImage);
+
     history.file_type === "document"
       ? await sendDocument(id, path)
       : await sendPhoto(id, path);
