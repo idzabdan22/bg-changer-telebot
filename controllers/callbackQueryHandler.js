@@ -114,6 +114,10 @@ const callbackQueryHandler = async (response) => {
     user.credit--;
     await user.save();
 
+    fs.unlink(path, (err) => {
+      if (err) return console.log(err);
+    });
+
     return;
   } catch (err) {
     console.log(err);

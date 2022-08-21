@@ -26,9 +26,9 @@ const sendPhoto = async (chat_id, local_file_path) => {
 
 module.exports = sendPhoto;
 //   .then((response) => {
-//     // fs.unlink(path, (err) => {
-//     //   if (err) return console.log(err);
-//     // });
+    // fs.unlink(path, (err) => {
+    //   if (err) return console.log(err);
+    // });
 //   })
 //   .catch((error) => {
 //     sendMessage(chat_id, "Oops, seems like server error...", null);
