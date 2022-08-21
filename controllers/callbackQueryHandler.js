@@ -54,7 +54,7 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
-    // return;
+    return;
 
     await sendMessage({
       chat_id: id,
