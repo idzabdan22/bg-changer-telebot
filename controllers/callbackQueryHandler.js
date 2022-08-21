@@ -9,6 +9,7 @@ const sendPhoto = require("./sendPhotoTele");
 const apiKeyGenerator = require("./apikeyChanger");
 const userCreditCheck = require("./userCreditCheck");
 const generatePaymentLink = require("./generatePaymentLink");
+const sharp = require("sharp");
 
 require("dotenv").config();
 
@@ -103,6 +104,14 @@ const callbackQueryHandler = async (response) => {
 
     fs.writeFileSync(path, bufferData);
 
+    sharp(path)
+      .resize(2048)
+      .toBuffer()
+      .then((data) => {
+        fs.writeFileSync(path, data);
+      });
+
+    
     history.file_type === "document"
       ? await sendDocument(id, path)
       : await sendPhoto(id, path);

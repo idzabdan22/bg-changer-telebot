@@ -109,12 +109,30 @@
 
 // console.log(new Date(1660314611520));
 
-const dates = new Date();
-console.log(dates);
-console.log(dates.toISOString());
-console.log(dates.toLocaleString());
-console.log(dates.getTime()); //Millisecond since 1 january 1970
+// const dates = new Date();
+// console.log(dates);
+// console.log(dates.toISOString());
+// console.log(dates.toLocaleString());
+// console.log(dates.getTime()); //Millisecond since 1 january 1970
 
-const pay = [];
+// const pay = [];
 
-if (pay.length) console.log(pay);
+// if (pay.length) console.log(pay);
+
+const sharp = require('sharp')
+const fs = require('fs')
+
+sharp('photos/imagekecil.jpg').resize(2048).toBuffer().then((data) => {
+    fs.writeFileSync('photos/image.jpg', data);
+})
+
+// const semiTransparentRedPng = await sharp({
+//     create: {
+//       width: 48,
+//       height: 48,
+//       channels: 4,
+//       background: { r: 255, g: 0, b: 0, alpha: 0.5 }
+//     }
+//   })
+//     .png()
+//     .toBuffer();
