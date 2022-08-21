@@ -55,7 +55,7 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
-    return;
+    // return;
 
     await sendMessage({
       chat_id: id,
@@ -104,24 +104,27 @@ const callbackQueryHandler = async (response) => {
 
     fs.writeFileSync(path, bufferData);
 
-    // sharp(path)
-    //   .resize(2048)
-    //   .toBuffer()
-    //   .then((data) => {});
+    sharp(path)
+      .resize(2048)
+      .toBuffer()
+      .then(async (data) => {
+        fs.writeFileSync(path, data);
+        history.file_type === "document"
+          ? await sendDocument(id, path)
+          : await sendPhoto(id, path);
+      });
 
-    const resizedImage = await sharp({
-      create: {
-        width: 2048,
-        height: 2561,
-        channels: 4,
-      },
-    }).toBuffer();
+    // const resizedImage = await sharp({
+    //   create: {
+    //     width: 2048,
+    //     height: 2561,
+    //     channels: 4,
+    //   },
+    // }).toBuffer();
 
-    fs.writeFileSync(path, resizedImage);
-
-    history.file_type === "document"
-      ? await sendDocument(id, path)
-      : await sendPhoto(id, path);
+    // history.file_type === "document"
+    //   ? await sendDocument(id, path)
+    //   : await sendPhoto(id, path);
 
     user.credit--;
     await user.save();
