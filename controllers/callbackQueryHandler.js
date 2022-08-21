@@ -55,7 +55,7 @@ const callbackQueryHandler = async (response) => {
       }
       return;
     }
-    return;
+    // return;
 
     await sendMessage({
       chat_id: id,
@@ -112,6 +112,8 @@ const callbackQueryHandler = async (response) => {
     const resizedImage = await sharp({
       create: {
         width: 2048,
+        height: 2561,
+        channels: 4,
       },
     }).toBuffer();
 
