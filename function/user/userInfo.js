@@ -1,6 +1,6 @@
-const { History, User, Transaction } = require("../model");
-const axios = require("axios");
-const sendMessage = require("./sendMessageTele");
+const { User } = require("../../model");
+const { sendMessage } = require("../telegram");
+
 const userInfo = async (userId) => {
   try {
     const user = await User.findById(userId);

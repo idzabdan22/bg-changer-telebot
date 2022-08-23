@@ -1,5 +1,5 @@
 const axios = require("axios");
-const CustomError = require("../utils/CustomError");
+const CustomError = require("../../utils/CustomError.util");
 require("dotenv").config();
 
 const getFilePath = async (file_id) => {

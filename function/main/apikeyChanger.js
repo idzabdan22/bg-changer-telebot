@@ -1,4 +1,4 @@
-const { Apikey } = require("../model");
+const { Apikey } = require("../../model/index.model");
 
 const apiKeyGenerator = async () => {
   try {

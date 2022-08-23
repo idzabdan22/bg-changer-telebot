@@ -1,4 +1,4 @@
-const { Transaction, User } = require("../model");
+const { Transaction, User } = require("../../model/index.model");
 
 const paymentHandling = async (responseData) => {
   try {
@@ -62,4 +62,4 @@ const paymentHandling = async (responseData) => {
   } catch (error) {}
 };
 
-module.exports = paymentHandling;
+module.exports = paymentHandling

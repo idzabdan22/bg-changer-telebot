@@ -1,4 +1,4 @@
-const User = require("../model/user");
+const User = require("../../model/user.model");
 const registerUser = require("./registerUser");
 
 const checkUser = async (userData) => {
@@ -8,6 +8,7 @@ const checkUser = async (userData) => {
     if (!isRegistered) await registerUser(userData);
     return;
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };

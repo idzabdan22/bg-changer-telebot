@@ -1,25 +1,22 @@
-const removeBackground = require("./removeBackground");
-const sendMessage = require("./sendMessageTele");
 const axios = require("axios");
 const fs = require("fs");
-const { User, History, Apikey } = require("../model");
+const { User, History, Apikey } = require("../../model/index.model");
+const { sendDocument, sendMessage, sendPhoto } = require("../telegram");
 const Path = require("path");
-const sendDocument = require("./sendDocTele");
-const sendPhoto = require("./sendPhotoTele");
+const { generatePaymentLink } = require("../payment");
+const { userCreditCheck } = require("../user");
+const removeBackground = require("./removeBackground");
 const apiKeyGenerator = require("./apikeyChanger");
-const userCreditCheck = require("./userCreditCheck");
-const generatePaymentLink = require("./generatePaymentLink");
 const sharp = require("sharp");
-
 require("dotenv").config();
 
 const callbackQueryHandler = async (response) => {
   try {
-    if (!response) {
-      return;
-    }
+    if (!response) return;
+
     const cbId = response?.id;
     const id = response.message.chat.id;
+    let isBuying = false;
 
     if (
       response.data === "gp2k" ||
@@ -30,21 +27,25 @@ const callbackQueryHandler = async (response) => {
         chat_id: id,
         text: "Generating payment link...",
       });
+
       const payment_link = await generatePaymentLink(response);
+
       await sendMessage({
         chat_id: id,
         text: `${payment_link}`,
       });
+
       await axios.post(
         `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
         {
           callback_query_id: cbId,
         }
       );
+      isBuying = true;
       return;
     }
 
-    if (!(await userCreditCheck(id))) {
+    if (!(await userCreditCheck(id)) && !isBuying) {
       if (cbId) {
         await axios.post(
           `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
@@ -54,21 +55,20 @@ const callbackQueryHandler = async (response) => {
         );
       }
       return;
+    } else {
+      if (cbId)
+        await axios.post(
+          `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
+          {
+            callback_query_id: cbId,
+          }
+        );
     }
-    return;
 
     await sendMessage({
       chat_id: id,
       text: "Processing, it may take a while...",
     });
-
-    // if (cbId)
-    //   await axios.post(
-    //     `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-    //     {
-    //       callback_query_id: cbId,
-    //     }
-    //   );
 
     console.log(response.data, response.message.text);
     const bg_color = response.data || response.message.text;
@@ -79,17 +79,14 @@ const callbackQueryHandler = async (response) => {
     );
     history.background_color = bg_color;
     history.timestamp = new Date(response.message.date * 1000);
-    await history.save();
 
     const file_extension = history.file_url.substring(
       history.file_url.indexOf(".") + 1,
       history.file_url.length
     );
+
     const path = `${process.cwd()}/photos/${id}.${file_extension}`;
     const apiKey = await apiKeyGenerator();
-
-    console.log(apiKey);
-    // return;
 
     const api_data = await Apikey.findById(apiKey._id);
 
@@ -126,13 +123,3 @@ const callbackQueryHandler = async (response) => {
 };
 
 module.exports = callbackQueryHandler;
-
-// if (cbId) {
-//   await axios.post(
-//     `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-//     {
-//       callback_query_id: cbId,
-//       text: "Finish Processing!",
-//     }
-//   );
-// }

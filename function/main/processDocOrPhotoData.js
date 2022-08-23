@@ -1,6 +1,5 @@
-const { History, User } = require("../model");
-const sendMessage = require("./sendMessageTele");
-const getTelegramFilePath = require("./getTeleFilePath");
+const { History, User } = require("../../model/index.model");
+const TFunc = require("../telegram");
 
 const processDocOrPhotoData = async (data) => {
   try {
@@ -13,12 +12,12 @@ const processDocOrPhotoData = async (data) => {
           validType.includes(data.message.document.mime_type))
       )
     ) {
-      await sendMessage({
+      await TFunc.sendMessage({
         chat_id: id,
         text: "Oops, that is not i expected...",
       });
 
-      await sendMessage({
+      await TFunc.sendMessage({
         chat_id: id,
         text: "Try again, sending file within these format: JPEG, PNG, JPG.",
       });
@@ -27,7 +26,7 @@ const processDocOrPhotoData = async (data) => {
       const file_id = !photoArr
         ? data.message.document.file_id
         : data.message.photo[photoArr.length - 1].file_id;
-      const file_url = await getTelegramFilePath(file_id);
+      const file_url = await TFunc.getTelegramFilePath(file_id);
       const file_type = !photoArr ? "document" : "photo";
 
       const userHistory = new History({
@@ -43,7 +42,7 @@ const processDocOrPhotoData = async (data) => {
       user.history.push(userHistory);
       await user.save();
 
-      await sendMessage({
+      await TFunc.sendMessage({
         chat_id: id,
         text: "Choose our favorite backround color below:",
         reply_markup: {
@@ -79,7 +78,7 @@ const processDocOrPhotoData = async (data) => {
           ],
         },
       });
-      await sendMessage({
+      await TFunc.sendMessage({
         chat_id: id,
         text: "Or type the hex color code (ex: 81d4fa, fff).",
       });
@@ -89,4 +88,4 @@ const processDocOrPhotoData = async (data) => {
   }
 };
 
-module.exports = processDocOrPhotoData;
+module.exports = processDocOrPhotoData

@@ -1,5 +1,5 @@
 const checkUser = require("./checkUser");
-const { User } = require("../model");
+const { User } = require("../../model/index.model");
 
 const registerUser = async (userData) => {
   try {
@@ -27,5 +27,4 @@ const registerUser = async (userData) => {
     throw err;
   }
 };
-
 module.exports = registerUser;

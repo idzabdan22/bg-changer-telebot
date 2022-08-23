@@ -17,7 +17,7 @@ const historySchema = new Schema({
   file_type: {
     type: String,
   },
-  width_pixel_size: {
+  pxl_width_size: {
     type: Number,
   },
 });

@@ -1,12 +1,10 @@
 const axios = require("axios");
-const { v4: uuidv4 } = require("uuid");
-const { User, Transaction } = require("../model");
+// const { v4: uuidv4 } = require("uuid");
+const { User, Transaction } = require("../../model/index.model");
 const {
-  getSandBoxHeader,
   getProductionHeader,
-} = require("../config/midtransHeaderConfig");
-const generateOrderId = require("../utils/generateOrderId");
-const sendMessage = require("./sendMessageTele");
+} = require("../../config/midtransHeaderConfig.config");
+const generateOrderId = require("../../utils/generateOrderId.util");
 
 const axiosConfig = {
   headers: getProductionHeader(),
@@ -29,7 +27,7 @@ const generatePaymentLink = async (responseData) => {
       credit = 28;
       amount = 10000.0;
     }
-    const userOrderId = uuidv4();
+    const userOrderId = generateOrderId;
     const data = {
       transaction_details: {
         order_id: userOrderId,
@@ -88,6 +86,4 @@ const generatePaymentLink = async (responseData) => {
   }
 };
 
-module.exports = generatePaymentLink;
-
-// generatePaymentLink();
+module.exports = generatePaymentLink

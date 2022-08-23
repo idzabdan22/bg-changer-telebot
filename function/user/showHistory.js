@@ -1,6 +1,7 @@
-const { History, User, Transaction } = require("../model");
+const { History, User, Transaction } = require("../../model");
 const axios = require("axios");
 const sendMessage = require("./sendMessageTele");
+
 const userHistory = async (userId) => {
   try {
     const user_history = await User.findById(userId).populate({

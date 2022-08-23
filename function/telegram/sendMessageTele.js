@@ -1,5 +1,5 @@
 const axios = require("axios");
-const CustomError = require("../utils/CustomError");
+const CustomError = require("../../utils/CustomError.util");
 require("dotenv").config();
 
 const sendMessage = async (data) => {
@@ -10,9 +10,8 @@ const sendMessage = async (data) => {
     );
     return res;
   } catch (error) {
-    console.log(error);
-    // throw new CustomError("Telegram Server Error", 500);
+    throw new CustomError("Telegram Server Error", 500);
   }
 };
 
-module.exports = sendMessage;
+module.exports = sendMessage

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const FormData = require("form-data");
-const CustomError = require("../utils/CustomError");
+const CustomError = require("../../utils/CustomError.util");
 require("dotenv").config();
 
 const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {

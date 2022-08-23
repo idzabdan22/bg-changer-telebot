@@ -1,4 +1,4 @@
-const sendMessage = require("./sendMessageTele");
+const telegramFunc = require("../telegram");
 
 const buyCredit = async (userId) => {
   try {
@@ -31,4 +31,6 @@ const buyCredit = async (userId) => {
   }
 };
 
-module.exports = buyCredit;
+module.exports = {
+  buyCredit,
+};
