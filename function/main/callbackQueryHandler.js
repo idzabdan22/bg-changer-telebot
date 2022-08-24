@@ -133,7 +133,10 @@ const callbackQueryHandler = async (response) => {
       ? await TFunc.sendDocument(id, path)
       : await TFunc.sendPhoto(id, path);
     user.credit--;
-    if (historySaveStatus) await history.save();
+    if (historySaveStatus) {
+      console.log("SAVE STATUS, CALLBACK BARU");
+      await history.save();
+    }
     await user.save();
 
     fs.unlink(path, (err) => {
