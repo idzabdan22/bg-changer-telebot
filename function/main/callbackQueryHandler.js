@@ -74,7 +74,7 @@ const callbackQueryHandler = async (response) => {
     });
 
     const bg_color = callbackData || messageText;
-
+    console.log(bg_color);
     const user = await User.findById(id);
     const history = await History.findById(
       user.history[user.history.length - 1]
@@ -85,6 +85,7 @@ const callbackQueryHandler = async (response) => {
     let historySaveStatus = true;
 
     if (history.timestamp !== "") {
+      console.log("CALLBACK LAMA");
       const newHistory = new History({
         background_color: bg_color,
         timestamp: new Date(),
@@ -96,6 +97,7 @@ const callbackQueryHandler = async (response) => {
       user.history.push(newHistory);
       historySaveStatus = false;
     } else {
+      console.log("CALLBACK BARU");
       history.background_color = bg_color;
       history.timestamp = new Date();
     }
