@@ -44,6 +44,13 @@ const generatePaymentLink = async (responseData) => {
         duration: 30,
         unit: "minutes",
       },
+      customer_details: {
+        first_name: "USER ",
+        last_name: `${userId}`,
+        email: `${userId}@yourbgchanger.com`,
+        phone: "+62181000000000",
+        notes: "Thank you for your purchase. Please follow the instructions to pay."
+      },
       item_details: [
         {
           name: `pack of ${credit} Credit`,

@@ -85,7 +85,6 @@ const callbackQueryHandler = async (response) => {
     let historySaveStatus = true;
 
     if (history.timestamp !== null) {
-      console.log("CALLBACK LAMA");
       const newHistory = new History({
         background_color: bg_color,
         timestamp: new Date(),
