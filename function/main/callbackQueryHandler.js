@@ -80,11 +80,14 @@ const callbackQueryHandler = async (response) => {
       user.history[user.history.length - 1]
     );
 
+
     console.log("LAST USER HISTORY", user.history[user.history.length - 1]);
 
     let historySaveStatus = true;
 
-    if (history.timestamp !== "") {
+    //
+
+    if (history.timestamp !== null) {
       console.log("CALLBACK LAMA");
       const newHistory = new History({
         background_color: bg_color,
