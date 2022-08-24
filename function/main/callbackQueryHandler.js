@@ -13,7 +13,7 @@ require("dotenv").config();
 const callbackQueryHandler = async (response) => {
   try {
     if (!response) return;
-    
+
     const cbId = response?.id;
     const id = response.message.chat.id;
     const callbackData = response?.data;
@@ -80,12 +80,9 @@ const callbackQueryHandler = async (response) => {
       user.history[user.history.length - 1]
     );
 
-
     console.log("LAST USER HISTORY", user.history[user.history.length - 1]);
 
     let historySaveStatus = true;
-
-    //
 
     if (history.timestamp !== null) {
       console.log("CALLBACK LAMA");
@@ -97,7 +94,9 @@ const callbackQueryHandler = async (response) => {
         owner: history.owner,
       });
       await newHistory.save();
+      console.log(newHistory);
       user.history.push(newHistory);
+      console.log(user);
       historySaveStatus = false;
     } else {
       console.log("CALLBACK BARU");
