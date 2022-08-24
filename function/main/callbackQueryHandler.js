@@ -13,7 +13,7 @@ require("dotenv").config();
 const callbackQueryHandler = async (response) => {
   try {
     if (!response) return;
-
+    return;
     const cbId = response?.id;
     const id = response.message.chat.id;
     const callbackData = response?.data;
