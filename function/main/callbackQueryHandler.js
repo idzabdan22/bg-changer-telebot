@@ -43,6 +43,7 @@ const callbackQueryHandler = async (response) => {
           callback_query_id: cbId,
         }
       );
+
       isBuying = true;
       return;
     }
@@ -78,6 +79,8 @@ const callbackQueryHandler = async (response) => {
     const history = await History.findById(
       user.history[user.history.length - 1]
     );
+
+    console.log("LAST USER HISTORY", user.history[user.history.length - 1]);
 
     let historySaveStatus = true;
 
@@ -129,9 +132,9 @@ const callbackQueryHandler = async (response) => {
     if (historySaveStatus) await history.save();
     await user.save();
 
-    // fs.unlink(path, (err) => {
-    //   if (err) return console.log(err);
-    // });
+    fs.unlink(path, (err) => {
+      if (err) return console.log(err);
+    });
 
     return;
   } catch (err) {
