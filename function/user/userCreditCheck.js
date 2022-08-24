@@ -1,13 +1,11 @@
-const mongoose = require("mongoose");
-const User = require("../model/user");
-const registerUser = require("./registerUser");
-const sendMessage = require("./sendMessageTele");
+const User = require("../../model/user.model");
+const TFunc = require("../telegram")
 
 const userCreditCheck = async (id) => {
   try {
     const isCreditAvailable = await User.findById(id);
     if (!isCreditAvailable.credit > 0) {
-      await sendMessage({
+      await TFunc.sendMessage({
         chat_id: id,
         text: "Not enough credit, please upgrade to premium!",
       });

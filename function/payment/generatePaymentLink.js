@@ -12,6 +12,7 @@ const axiosConfig = {
 
 const generatePaymentLink = async (responseData) => {
   try {
+    const userId = responseData.from.id;
     let amount = 0;
     let payment_method = [];
     let credit = 0;
@@ -27,7 +28,7 @@ const generatePaymentLink = async (responseData) => {
       credit = 28;
       amount = 10000.0;
     }
-    const userOrderId = generateOrderId;
+    const userOrderId = generateOrderId(userId);
     const data = {
       transaction_details: {
         order_id: userOrderId,
@@ -45,7 +46,7 @@ const generatePaymentLink = async (responseData) => {
       },
       item_details: [
         {
-          name: `: ${credit} Credit`,
+          name: `pack of ${credit} Credit`,
           price: amount,
           quantity: 1,
           merchant_name: "Your BG Changer",

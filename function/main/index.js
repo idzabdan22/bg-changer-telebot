@@ -1,6 +1,6 @@
 const removeBackground = require("./removeBackground");
 const callbackQueryHandler = require("./callbackQueryHandler");
-const apiKeyGenerator = require("./apikeyChanger");
+const apiKeyGenerator = require("./apiKeyGenerator");
 const processCommand = require("./processCommand");
 const processDocOrPhotoData = require("./processDocOrPhotoData");
 

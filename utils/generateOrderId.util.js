@@ -1,2 +1,2 @@
-module.exports.generateOrderId = (userId) => `${userId}${new Date().getTime()}`;
-
+const generateOrderId = (userId) => `${userId}${new Date().getTime()}`;
+module.exports = generateOrderId;

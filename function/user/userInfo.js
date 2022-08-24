@@ -1,12 +1,12 @@
-const { User } = require("../../model");
-const { sendMessage } = require("../telegram");
+const { User } = require("../../model/index.model");
+const TFunc = require("../telegram");
 
 const userInfo = async (userId) => {
   try {
     const user = await User.findById(userId);
     const userInfoTemplate = `Here your's user info:\nuser_id: ${user._id}\nusername: ${user.username}\ncredit: ${user.credit}\nfirst_name: ${user.first_name}\nlast_name: ${user.last_name}\nlanguage: ${user.language_code}
     `;
-    await sendMessage({
+    await TFunc.sendMessage({
       chat_id: userId,
       text: userInfoTemplate,
       reply_markup: {

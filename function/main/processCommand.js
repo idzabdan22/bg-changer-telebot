@@ -1,4 +1,4 @@
-const MainFunc = require("../main");
+const callbackQueryHandler = require("./callbackQueryHandler");
 const PaymentFunc = require("../payment");
 const UserFunc = require("../user");
 const TFunc = require("../telegram");
@@ -11,7 +11,6 @@ const processCommand = async (chatData) => {
     if (message.match(new RegExp("/[a-zA-Z]+"))) {
       switch (message) {
         case "/start":
-          console.log("START");
           await UserFunc.checkUser(chatData.message.from);
           await TFunc.sendMessage({
             chat_id: id,
@@ -23,7 +22,7 @@ const processCommand = async (chatData) => {
           });
           break;
         case "/info":
-          // await userInfo(id);
+          await UserFunc.userInfo(id);
           break;
         case "/history":
           // await userHistory(id);

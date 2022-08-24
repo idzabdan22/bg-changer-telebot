@@ -1,8 +1,8 @@
-const telegramFunc = require("../telegram");
+const TFunc = require("../telegram");
 
 const buyCredit = async (userId) => {
   try {
-    await sendMessage({
+    await TFunc.sendMessage({
       chat_id: userId,
       text: "Please read our payment's rules:",
       reply_markup: {
@@ -31,6 +31,4 @@ const buyCredit = async (userId) => {
   }
 };
 
-module.exports = {
-  buyCredit,
-};
+module.exports = buyCredit;

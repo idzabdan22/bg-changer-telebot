@@ -14,12 +14,14 @@ const sendDocument = async (chat_id, local_file_path) => {
       fs.createReadStream(local_file_path),
       nodePath.basename(local_file_path)
     );
+    console.log("SAMPAI SINI");
     const res = await axios.post(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendDocument`,
       teleForm
     );
     return res.status;
   } catch (error) {
+    console.log(error);
     throw new CustomError("Telegram Server Error", 500);
   }
 };

@@ -11,7 +11,7 @@ const app = express();
 const mainRouter = require("./router/main.router");
 const paymentRouter = require("./router/payment.router");
 
-const dbUrl = "mongodb://127.0.0.1:27017/bg-changer-telebot";
+const dbUrl = process.env.DB || "mongodb://127.0.0.1:27017/bg-changer-telebot";
 
 mongoose
   .connect(dbUrl)
@@ -35,7 +35,7 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   const { status = 500 } = err;
   if (!err.message) err.message = "Oh no, Something went wrong!";
-  res.status(status).render("error.ejs", { err });
+  res.status(status).render("error", { err });
 });
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => {

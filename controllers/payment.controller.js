@@ -1,6 +1,8 @@
+const PaymentFunc = require("../function/payment");
+
 const paymentHandling = async (req, res) => {
   try {
-    await paymentHandling(req.body);
+    await PaymentFunc.paymentHandling(req.body);
     res.status(200).send({ message: "ok" });
   } catch (error) {
     res.status(500).send({ message: "internal server error" });
