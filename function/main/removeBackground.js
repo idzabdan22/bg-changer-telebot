@@ -43,6 +43,7 @@ const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
     //     break;
     // }
     // throw new CustomError(msg, error.response.status);
+    return false;
   }
 };
 

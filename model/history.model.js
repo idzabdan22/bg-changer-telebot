@@ -17,9 +17,6 @@ const historySchema = new Schema({
   file_type: {
     type: String,
   },
-  pxl_width_size: {
-    type: Number,
-  },
 });
 
 module.exports = model("History", historySchema);

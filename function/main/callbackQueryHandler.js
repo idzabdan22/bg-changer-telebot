@@ -7,13 +7,14 @@ const removeBackground = require("./removeBackground");
 const Path = require("path");
 const PaymentFunc = require("../payment");
 const UserFunc = require("../user");
-const sharp = require("sharp");
+const imageResizer = require("./imageResizer");
+const probe = require("probe-image-size");
 require("dotenv").config();
 
 const callbackQueryHandler = async (response) => {
   try {
     if (!response) return;
-
+    console.log(response);
     const cbId = response?.id;
     const id = response.message.chat.id;
     const callbackData = response?.data;
@@ -58,14 +59,6 @@ const callbackQueryHandler = async (response) => {
         );
       }
       return;
-    } else {
-      // if (cbId)
-      //   await axios.post(
-      //     `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-      //     {
-      //       callback_query_id: cbId,
-      //     }
-      //   );
     }
 
     await TFunc.sendMessage({
@@ -81,6 +74,7 @@ const callbackQueryHandler = async (response) => {
     );
 
     console.log("LAST USER HISTORY", user.history[user.history.length - 1]);
+    console.log(history);
 
     let historySaveStatus = true;
 
@@ -108,40 +102,56 @@ const callbackQueryHandler = async (response) => {
       history.file_url.length
     );
 
-    const path = `${process.cwd()}/photos/${id}.${file_extension}`;
+    const path = `${process.cwd()}/photos/${new Date()}.${file_extension}`;
     // const apiKey = await apiKeyGenerator();
 
     // const api_data = await Apikey.findById(apiKey._id);
-
+    // return;
     const bufferData = await removeBackground(
       `https://api.telegram.org/file/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/${history.file_url}`,
       bg_color,
-      "FdSZyfLmRduhYyDyfvH1Xau2" //apiKey.key
+      "jCuaRV8CGUi9YtgLFJyEMjv4" //apiKey.key
     );
 
     // api_data.api_credit--;
     // await api_data.save();
 
-    fs.writeFileSync(path, bufferData);
-
-    const data = await sharp(path).resize(2048).toBuffer();
-
-    fs.writeFileSync(path, data);
+    if (bufferData) {
+      const { width, height } = await probe(
+        `https://api.telegram.org/file/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/${history.file_url}`
+      );
+      console.log(width, height);
+      // return;
+      await imageResizer(bufferData, path, width, height);
+      // fs.writeFileSync(path, bufferData);
+      // const data = await sharp(path).resize(2048).toBuffer();
+      // // fs.writeFileSync(path, data);
+    }
 
     history.file_type === "document"
       ? await TFunc.sendDocument(id, path)
       : await TFunc.sendPhoto(id, path);
+
     user.credit--;
+
     if (historySaveStatus) {
       console.log("SAVE STATUS, CALLBACK BARU");
       await history.save();
     }
     await user.save();
 
-    fs.unlink(path, (err) => {
-      if (err) return console.log(err);
-    });
+    // fs.unlink(path, (err) => {
+    //   if (err) return console.log(err);
+    // });
 
+    if (cbId) {
+      await axios.post(
+        `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
+        {
+          callback_query_id: cbId,
+        }
+      );
+    }
     return;
   } catch (err) {
     console.log(err);

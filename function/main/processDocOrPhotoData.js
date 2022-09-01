@@ -23,7 +23,7 @@ const processDocOrPhotoData = async (data) => {
       });
     } else {
       const photoArr = data.message.photo;
-      const file_id = !photoArr
+      file_id = !photoArr
         ? data.message.document.file_id
         : data.message.photo[photoArr.length - 1].file_id;
       const file_url = await TFunc.getTelegramFilePath(file_id);
@@ -38,6 +38,7 @@ const processDocOrPhotoData = async (data) => {
       });
 
       await userHistory.save();
+      console.log(userHistory);
       const user = await User.findById(id);
       user.history.push(userHistory);
       await user.save();
@@ -88,4 +89,4 @@ const processDocOrPhotoData = async (data) => {
   }
 };
 
-module.exports = processDocOrPhotoData
+module.exports = processDocOrPhotoData;

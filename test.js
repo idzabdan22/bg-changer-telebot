@@ -1,142 +1,150 @@
-// const axios = require("axios");
-// const FormData = require("form-data");
-// const fs = require("fs");
-// const path = require("path");
-// require("dotenv").config();
+// // const axios = require("axios");
+// // const FormData = require("form-data");
+// // const fs = require("fs");
+// // const path = require("path");
+// // require("dotenv").config();
 
-// // // URL of the image
-// // const url = 'GFG.jpeg';
+// // // // URL of the image
+// // // const url = 'GFG.jpeg';
 
-// // https.get(url,(res) => {
-// // 	// Image will be stored at this path
-// // 	const path = `${__dirname}/files/img.jpeg`;
-// // 	const filePath = fs.createWriteStream(path);
-// // 	res.pipe(filePath);
-// // 	filePath.on('finish',() => {
-// // 		filePath.close();
-// // 		console.log('Download Completed');
-// // 	})
-// // })
+// // // https.get(url,(res) => {
+// // // 	// Image will be stored at this path
+// // // 	const path = `${__dirname}/files/img.jpeg`;
+// // // 	const filePath = fs.createWriteStream(path);
+// // // 	res.pipe(filePath);
+// // // 	filePath.on('finish',() => {
+// // // 		filePath.close();
+// // // 		console.log('Download Completed');
+// // // 	})
+// // // })
 
-// const inputPath = "photos/1139051246.jpg";
-// const formData = new FormData();
-// formData.append("chat_id", "1139051246");
-// formData.append("photo", fs.createReadStream(inputPath), path.basename(inputPath));
-
-// // console.log(formData.getHeaders());
-
-// axios({
-//   method: "post",
-//   url: "https://api.telegram.org/bot5568457002:AAG8OuUFFkeqhPNubktl2SjaTSwSnzufv4I/sendPhoto",
-//   data: formData,
-// })
-//   .then((response) => {
-//     //   if(response.status != 200);
-//     // console.log("SUCCESSS", response.data);
-//     //   fs.writeFileSync("no-bg.png", response.data);
-
-//   })
-//   .catch((error) => {
-//     console.log("ERROR");
-//     // return console.error('Request failed:', error);
-//   });
-
-// // const inputPath = "photos/pt_1.jpg";
+// // const inputPath = "photos/1139051246.jpg";
 // // const formData = new FormData();
-// // formData.append("size", "auto");
-// // formData.append("image_file", fs.createReadStream(inputPath), path.basename(inputPath));
+// // formData.append("chat_id", "1139051246");
+// // formData.append("photo", fs.createReadStream(inputPath), path.basename(inputPath));
 
-// // console.log(formData.getHeaders());
+// // // console.log(formData.getHeaders());
 
 // // axios({
 // //   method: "post",
-// //   url: "https://api.remove.bg/v1.0/removebg",
+// //   url: "https://api.telegram.org/bot5568457002:AAG8OuUFFkeqhPNubktl2SjaTSwSnzufv4I/sendPhoto",
 // //   data: formData,
-// //   responseType: "arraybuffer",
-// //   headers: {
-// //     ...formData.getHeaders(),
-// //     "X-Api-Key": process.env.REMOVEBG_TOKEN,
-// //   },
-// //   encoding: null,
 // // })
 // //   .then((response) => {
-// //       if(response.status != 200);
-// //     console.log("SUCCESSS", response.data);
-// // //       fs.writeFileSync("no-bg1.png", response.data);
-// // //   })
-// // //   .catch((error) => {
-// // //     console.log("ERROR");
-// // //     // return console.error('Request failed:', error);
-// // //   });
+// //     //   if(response.status != 200);
+// //     // console.log("SUCCESSS", response.data);
+// //     //   fs.writeFileSync("no-bg.png", response.data);
 
-// // const randomNum = Math.floor(Math.random() * 6);
-// // console.log(randomNum);
+// //   })
+// //   .catch((error) => {
+// //     console.log("ERROR");
+// //     // return console.error('Request failed:', error);
+// //   });
 
-// console.log(process.cwd());
+// // // const inputPath = "photos/pt_1.jpg";
+// // // const formData = new FormData();
+// // // formData.append("size", "auto");
+// // // formData.append("image_file", fs.createReadStream(inputPath), path.basename(inputPath));
 
-// const test = async () => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve("HI IM ASYNC");
-//       console.log("AFTER ASYNC 3 sec");
-//     }, 3000);
-//   });
-// };
+// // // console.log(formData.getHeaders());
 
-// function an() {
-//   test();
-// }
+// // // axios({
+// // //   method: "post",
+// // //   url: "https://api.remove.bg/v1.0/removebg",
+// // //   data: formData,
+// // //   responseType: "arraybuffer",
+// // //   headers: {
+// // //     ...formData.getHeaders(),
+// // //     "X-Api-Key": process.env.REMOVEBG_TOKEN,
+// // //   },
+// // //   encoding: null,
+// // // })
+// // //   .then((response) => {
+// // //       if(response.status != 200);
+// // //     console.log("SUCCESSS", response.data);
+// // // //       fs.writeFileSync("no-bg1.png", response.data);
+// // // //   })
+// // // //   .catch((error) => {
+// // // //     console.log("ERROR");
+// // // //     // return console.error('Request failed:', error);
+// // // //   });
 
-// an();
-// console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOO");
+// // // const randomNum = Math.floor(Math.random() * 6);
+// // // console.log(randomNum);
 
-// const {
-//   getProductionHeader,
-//   getSandBoxHeader,
-// } = require("./config/midtransHeaderConfig");
-// const generateOrderId = require("./utils/generateOrderId");
+// // console.log(process.cwd());
 
-// console.log(getProductionHeader());
+// // const test = async () => {
+// //   return new Promise((resolve, reject) => {
+// //     setTimeout(() => {
+// //       resolve("HI IM ASYNC");
+// //       console.log("AFTER ASYNC 3 sec");
+// //     }, 3000);
+// //   });
+// // };
 
-// console.log(generateOrderId(1235554));
+// // function an() {
+// //   test();
+// // }
 
-// console.log(new Date().toUTCString());
-// console.log(new Date().toLocaleDateString());
-// console.log(new Date().toISOString());
+// // an();
+// // console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOO");
+
+// // const {
+// //   getProductionHeader,
+// //   getSandBoxHeader,
+// // } = require("./config/midtransHeaderConfig");
+// // const generateOrderId = require("./utils/generateOrderId");
+
+// // console.log(getProductionHeader());
+
+// // console.log(generateOrderId(1235554));
+
 // // console.log(new Date().toUTCString());
+// // console.log(new Date().toLocaleDateString());
+// // console.log(new Date().toISOString());
+// // // console.log(new Date().toUTCString());
 
-// console.log(new Date(1660385098455));
+// // console.log(new Date(1660385098455));
 
-// console.log(new Date(1660314611520));
+// // console.log(new Date(1660314611520));
 
-// const dates = new Date();
-// console.log(dates);
-// console.log(dates.toISOString());
-// console.log(dates.toLocaleString());
-// console.log(dates.getTime()); //Millisecond since 1 january 1970
+// // const dates = new Date();
+// // console.log(dates);
+// // console.log(dates.toISOString());
+// // console.log(dates.toLocaleString());
+// // console.log(dates.getTime()); //Millisecond since 1 january 1970
 
-// const pay = [];
+// // const pay = [];
 
-// if (pay.length) console.log(pay);
+// // if (pay.length) console.log(pay);
 
-const sharp = require("sharp");
+// const sharp = require("sharp");
+// const fs = require("fs");
+
+// (async () => {
+//   const data = await sharp("photos/imagekecil.jpg").resize(2048).toBuffer();
+
+//   console.log(data);
+
+//   fs.writeFileSync("photos/image.jpg", data);
+// })();
+
+// // const semiTransparentRedPng = await sharp({
+// //   create: {
+// //     width: 2048,
+// //     height: 2561,
+// //     channels: 4,
+// //     background: { r: 255, g: 0, b: 0, alpha: 0.5 },
+// //   },
+// // })
+// //   .png()
+// //   .toBuffer();
+
+const MainFunc = require("./function/main");
 const fs = require("fs");
 
-(async () => {
-  const data = await sharp("photos/imagekecil.jpg").resize(2048).toBuffer();
-
+MainFunc.imageResizer("./photos/a.jpeg", 500, 500).then((data) => {
   console.log(data);
-
-  fs.writeFileSync("photos/image.jpg", data);
-})();
-
-// const semiTransparentRedPng = await sharp({
-//   create: {
-//     width: 2048,
-//     height: 2561,
-//     channels: 4,
-//     background: { r: 255, g: 0, b: 0, alpha: 0.5 },
-//   },
-// })
-//   .png()
-//   .toBuffer();
+  fs.writeFileSync("./photos/a-resized.jpg", data);
+});

@@ -1,5 +1,4 @@
 const axios = require("axios");
-// const { v4: uuidv4 } = require("uuid");
 const { User, Transaction } = require("../../model/index.model");
 const {
   getProductionHeader,
@@ -45,11 +44,12 @@ const generatePaymentLink = async (responseData) => {
         unit: "minutes",
       },
       customer_details: {
-        first_name: "USER ",
+        first_name: "USER",
         last_name: `${userId}`,
         email: `${userId}@yourbgchanger.com`,
         phone: "+62181000000000",
-        notes: "Thank you for your purchase. Please follow the instructions to pay."
+        notes:
+          "Thank you for your purchase. Please follow the instructions to pay.",
       },
       item_details: [
         {
@@ -59,7 +59,7 @@ const generatePaymentLink = async (responseData) => {
           merchant_name: "Your BG Changer",
         },
       ],
-      custom_field1: "custom field 1 content",
+      // custom_field1: "custom field 1 content",
     };
 
     if (payment_method.length) data.enabled_payments = payment_method;
@@ -86,7 +86,6 @@ const generatePaymentLink = async (responseData) => {
     user.transaction_history.push(transaction);
     await transaction.save();
     await user.save();
-
     return res.data.payment_url;
   } catch (error) {
     console.log(error);
@@ -94,4 +93,4 @@ const generatePaymentLink = async (responseData) => {
   }
 };
 
-module.exports = generatePaymentLink
+module.exports = generatePaymentLink;

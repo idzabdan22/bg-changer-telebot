@@ -3,6 +3,7 @@ const callbackQueryHandler = require("./callbackQueryHandler");
 const apiKeyGenerator = require("./apiKeyGenerator");
 const processCommand = require("./processCommand");
 const processDocOrPhotoData = require("./processDocOrPhotoData");
+const imageResizer = require("./imageResizer");
 
 module.exports = {
   removeBackground,
@@ -10,4 +11,5 @@ module.exports = {
   apiKeyGenerator,
   processCommand,
   processDocOrPhotoData,
+  imageResizer,
 };
