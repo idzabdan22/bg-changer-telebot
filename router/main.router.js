@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
-import * as mainController from "../controllers/main.controller.js";
+import { index, handleTelegram } from "../controllers/main.controller.js";
 
-router.route("/").get(mainController.index).post(mainController.handleTelegram);
+router.route("/").get(index).post(handleTelegram);
 
 export default router;
