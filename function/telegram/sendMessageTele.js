@@ -1,10 +1,11 @@
-const axios = require("axios");
-const CustomError = require("../../utils/CustomError.util");
-require("dotenv").config();
+import axios from "axios";
+const { post } = axios;import CustomError from "../../utils/CustomError.util.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const sendMessage = async (data) => {
   try {
-    const res = await axios.post(
+    const res = await post(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendMessage`,
       data
     );
@@ -14,4 +15,4 @@ const sendMessage = async (data) => {
   }
 };
 
-module.exports = sendMessage
+export default sendMessage;

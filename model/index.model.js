@@ -1,9 +1,9 @@
-const User = require("./user.model");
-const Apikey = require("./rbgApiKey.model");
-const History = require("./history.model");
-const Transaction = require("./transaction.model");
+import User from "./user.model.js";
+import Apikey from "./rbgApiKey.model.js";
+import History from "./history.model.js";
+import Transaction from "./transaction.model.js";
 
-module.exports = {
+export {
   User,
   History,
   Apikey,

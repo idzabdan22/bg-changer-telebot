@@ -1,5 +1,5 @@
-const { User } = require("../../model/index.model");
-const TFunc = require("../telegram");
+import { User } from "../../model/index.model.js";
+import * as TFunc from "../telegram/index.js";
 
 const userInfo = async (userId) => {
   try {
@@ -18,7 +18,7 @@ const userInfo = async (userId) => {
             },
             {
               text: "Transaction History",
-              callback_data: "/transactionHistory",
+              callback_data: "/tHistory",
             },
           ],
         ],
@@ -27,4 +27,4 @@ const userInfo = async (userId) => {
   } catch (error) {}
 };
 
-module.exports = userInfo;
+export default userInfo;

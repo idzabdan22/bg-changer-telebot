@@ -1,4 +1,4 @@
-const sharp = require("sharp");
+import sharp from "sharp";
 
 // const imageResizer = async (inputPath, width, height) => {
 //   try {
@@ -29,4 +29,4 @@ const imageResizer = async (buffer, outputPath, width, height) => {
   }
 };
 
-module.exports = imageResizer;
+export default imageResizer;

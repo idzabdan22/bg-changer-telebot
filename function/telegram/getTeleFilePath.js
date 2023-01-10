@@ -1,10 +1,12 @@
-const axios = require("axios");
-const CustomError = require("../../utils/CustomError.util");
-require("dotenv").config();
+import axios from "axios";
+const { get } = axios;
+import CustomError from "../../utils/CustomError.util.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const getFilePath = async (file_id) => {
   try {
-    const res = await axios.get(
+    const res = await get(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/getFile?file_id=${file_id}`
     );
     return res.data.result.file_path;
@@ -13,4 +15,4 @@ const getFilePath = async (file_id) => {
   }
 };
 
-module.exports = getFilePath;
+export default getFilePath;

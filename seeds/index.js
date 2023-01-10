@@ -1,11 +1,12 @@
-const mongoose = require("mongoose");
-const { v4: uuidv4 } = require("uuid");
-const { Apikey, User } = require("../model");
-require("dotenv").config();
+import mongoose from "mongoose";
+const { connect } = mongoose;
+import { v4 as uuidv4 } from "uuid";
+import Apikey from "../model/rbgApiKey.model.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-
-mongoose
-  .connect("mongodb://127.0.0.1:27017/bg-changer-telebot")
+console.log(Apikey);
+connect(process.env.DB || "mongodb://127.0.0.1:27017/bg-changer-telebot")
   .then(() => {
     console.log("Success Connect to MongoDB");
   })

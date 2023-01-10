@@ -1,7 +1,9 @@
-const axios = require("axios");
-const FormData = require("form-data");
-const CustomError = require("../../utils/CustomError.util");
-require("dotenv").config();
+import axios from "axios";
+import FormData from "form-data";
+import CustomError from "../../utils/CustomError.util.js";
+import dotenv from "dotenv";
+dotenv.config();
+const { post } = axios;
 
 const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
   try {
@@ -12,21 +14,17 @@ const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
       formData.append("bg_color", bg_color);
     }
 
-    const res = await axios.post(
-      "https://api.remove.bg/v1.0/removebg",
-      formData,
-      {
-        headers: {
-          ...formData.getHeaders(),
-          "X-Api-Key": apiKey,
-        },
-        responseType: "arraybuffer",
-        encoding: null,
-      }
-    );
+    const res = await post("https://api.remove.bg/v1.0/removebg", formData, {
+      headers: {
+        ...formData.getHeaders(),
+        "X-Api-Key": apiKey,
+      },
+      responseType: "arraybuffer",
+      encoding: null,
+    });
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log("ERROR DI REMOVE BACKGROUND");
     // let msg = "";
     // switch (error.response.) {
     //   case 400:
@@ -47,4 +45,4 @@ const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
   }
 };
 
-module.exports = backroundChangeProcess;
+export default backroundChangeProcess;

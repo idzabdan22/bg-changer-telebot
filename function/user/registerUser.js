@@ -1,5 +1,5 @@
-const checkUser = require("./checkUser");
-const { User } = require("../../model/index.model");
+import checkUser from "./checkUser.js";
+import { User } from "../../model/index.model.js";
 
 const registerUser = async (userData) => {
   try {
@@ -27,4 +27,4 @@ const registerUser = async (userData) => {
     throw err;
   }
 };
-module.exports = registerUser;
+export default registerUser;

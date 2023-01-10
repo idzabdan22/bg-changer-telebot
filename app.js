@@ -1,29 +1,34 @@
 "use strict";
+import dotenv from "dotenv";
 
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+  dotenv.config();
 }
 
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+import express from "express";
+import mongoose from "mongoose";
+const { connect } = mongoose;
+import bp from "body-parser";
+const { urlencoded, json } = bp;
 const app = express();
-const mainRouter = require("./router/main.router");
-const paymentRouter = require("./router/payment.router");
+import mainRouter from "./router/main.router.js";
+import paymentRouter from "./router/payment.router.js";
 
-const dbUrl = process.env.DB || "mongodb://127.0.0.1:27017/bg-changer-telebot";
+const dbUrl = process.env.DB;
 
-mongoose
-  .connect(dbUrl)
-  .then(() => {
+// console.log(dbUrl);
+
+connect(dbUrl)
+  .then((res) => {
     console.log("Success Connect to MongoDB");
+    // console.log(res)
   })
   .catch((err) => {
     console.log("Failed Connect to MongoDB", err);
   });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.use("/", mainRouter);
 app.use("/payment", paymentRouter);

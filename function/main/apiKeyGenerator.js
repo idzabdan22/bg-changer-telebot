@@ -1,4 +1,4 @@
-const { Apikey } = require("../../model/index.model");
+import { Apikey } from "../../model/index.model.js";
 
 const apiKeyGenerator = async () => {
   try {
@@ -11,4 +11,4 @@ const apiKeyGenerator = async () => {
   }
 };
 
-module.exports = apiKeyGenerator;
+export default apiKeyGenerator;

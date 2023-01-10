@@ -1,4 +1,8 @@
-const MainFunc = require("../function/main");
+import {
+  callbackQueryHandler,
+  processDocOrPhotoData,
+  processCommand,
+} from "../function/main/index.js";
 
 const index = (req, res) => {
   try {
@@ -13,12 +17,14 @@ const index = (req, res) => {
 const handleTelegram = async (req, res) => {
   try {
     const callbackQuery = req.body.callback_query;
-    await MainFunc.callbackQueryHandler(callbackQuery);
+    console.log(callbackQuery);
+    await callbackQueryHandler(callbackQuery);
     const message = req.body?.message;
+    // console.log("MESSAGE, ", message);
     if (message) {
       !message?.text
-        ? await MainFunc.processDocOrPhotoData(req.body)
-        : await MainFunc.processCommand(req.body);
+        ? await processDocOrPhotoData(req.body)
+        : await processCommand(req.body);
     }
     res.status(200).send({ message: "ok" });
   } catch (error) {
@@ -27,7 +33,7 @@ const handleTelegram = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   index,
   handleTelegram,
 };

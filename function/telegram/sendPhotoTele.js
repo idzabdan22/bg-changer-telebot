@@ -1,9 +1,11 @@
-const FormData = require("form-data");
-const axios = require("axios");
-const nodePath = require("path");
-const fs = require("fs");
-const CustomError = require("../../utils/CustomError.util");
-require("dotenv").config();
+import FormData from "form-data";
+import axios from "axios";
+const { post } = axios;
+import { basename } from "path";
+import { createReadStream } from "fs";
+import CustomError from "../../utils/CustomError.util.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const sendPhoto = async (chat_id, local_file_path) => {
   try {
@@ -11,10 +13,10 @@ const sendPhoto = async (chat_id, local_file_path) => {
     teleForm.append("chat_id", chat_id);
     teleForm.append(
       "photo",
-      fs.createReadStream(local_file_path),
-      nodePath.basename(local_file_path)
+      createReadStream(local_file_path),
+      basename(local_file_path)
     );
-    const res = await axios.post(
+    const res = await post(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendPhoto`,
       teleForm
     );
@@ -24,7 +26,7 @@ const sendPhoto = async (chat_id, local_file_path) => {
   }
 };
 
-module.exports = sendPhoto;
+export default sendPhoto;
 
 //   .then((response) => {
 // fs.unlink(path, (err) => {

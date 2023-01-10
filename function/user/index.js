@@ -1,9 +1,9 @@
-const checkUser = require("./checkUser");
-const registerUser = require("./registerUser");
-const userCreditCheck = require("./userCreditCheck");
-const userInfo = require("./userInfo");
+import checkUser from "./checkUser.js";
+import registerUser from "./registerUser.js";
+import userCreditCheck from "./userCreditCheck.js";
+import userInfo from "./userInfo.js";
 
-module.exports = {
+export {
   checkUser,
   registerUser,
   userCreditCheck,

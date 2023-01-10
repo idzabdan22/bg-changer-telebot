@@ -1,4 +1,4 @@
-const { Transaction, User } = require("../../model/index.model");
+import { Transaction, User } from "../../model/index.model.js";
 
 const paymentHandling = async (responseData) => {
   try {
@@ -62,4 +62,4 @@ const paymentHandling = async (responseData) => {
   } catch (error) {}
 };
 
-module.exports = paymentHandling
+export default paymentHandling

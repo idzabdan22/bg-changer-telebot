@@ -1,31 +1,29 @@
-const { History, User, Transaction } = require("../../model");
-const axios = require("axios");
-const sendMessage = require("./sendMessageTele");
+// import { User } from "../../model/index.model.js";
+import { User } from "../../model/index.model.js";
+import { sendMessage } from "../telegram/index.js";
 
-const userHistory = async (userId) => {
+export default async (userId) => {
   try {
     const user_history = await User.findById(userId).populate({
       path: "history",
     });
-    // let historyTemplate = "";
-    // for (const history of userHistory.history) {
-    //   historyTemplate += `${history.}`
-    // }
-    // console.log(user_history.history);
-
+    console.log(user_history.history[0].owner);
+    // return;
+    let historyTemplate = "";
+    for (const history of user_history.history) {
+      historyTemplate += `${history._id}\n`;
+    }
+    console.log(historyTemplate);
+    // return;
     await sendMessage({
       chat_id: userId,
-      text: "Your Trans",
+      text: `${historyTemplate}`,
       reply_markup: {
         inline_keyboard: [
           [
             {
-              text: "History",
-              callback_data: "/history",
-            },
-            {
               text: "Transaction History",
-              callback_data: "/transactionHistory",
+              callback_data: "/tHistory",
             },
           ],
         ],
@@ -33,5 +31,3 @@ const userHistory = async (userId) => {
     });
   } catch (error) {}
 };
-
-module.exports = userHistory;

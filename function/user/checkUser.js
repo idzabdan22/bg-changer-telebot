@@ -1,5 +1,5 @@
-const User = require("../../model/user.model");
-const registerUser = require("./registerUser");
+import User from "../../model/user.model.js";
+import registerUser from "./registerUser.js";
 
 const checkUser = async (userData) => {
   try {
@@ -13,4 +13,4 @@ const checkUser = async (userData) => {
   }
 };
 
-module.exports = checkUser;
+export default checkUser;

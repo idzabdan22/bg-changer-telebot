@@ -1,8 +1,8 @@
-const paymentHandling = require("./paymentHandling");
-const generatePaymentLink = require("./generatePaymentLink");
-const buyCredit = require("./buyCredit");
+import paymentHandling from "./paymentHandling.js";
+import generatePaymentLink from "./generatePaymentLink.js";
+import buyCredit from "./buyCredit.js";
 
-module.exports = {
+export {
   paymentHandling,
   generatePaymentLink,
   buyCredit,

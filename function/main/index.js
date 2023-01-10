@@ -1,11 +1,11 @@
-const removeBackground = require("./removeBackground");
-const callbackQueryHandler = require("./callbackQueryHandler");
-const apiKeyGenerator = require("./apiKeyGenerator");
-const processCommand = require("./processCommand");
-const processDocOrPhotoData = require("./processDocOrPhotoData");
-const imageResizer = require("./imageResizer");
+import removeBackground from "./removeBackground.js";
+import callbackQueryHandler from "./callbackQueryHandler.js";
+import apiKeyGenerator from "./apiKeyGenerator.js";
+import processCommand from "./processCommand.js";
+import processDocOrPhotoData from "./processDocOrPhotoData.js";
+import imageResizer from "./imageResizer.js";
 
-module.exports = {
+export {
   removeBackground,
   callbackQueryHandler,
   apiKeyGenerator,

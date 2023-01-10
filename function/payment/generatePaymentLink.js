@@ -1,9 +1,8 @@
-const axios = require("axios");
-const { User, Transaction } = require("../../model/index.model");
-const {
-  getProductionHeader,
-} = require("../../config/midtransHeaderConfig.config");
-const generateOrderId = require("../../utils/generateOrderId.util");
+import axios from "axios";
+const { post } = axios;
+import { User, Transaction} from "../../model/index.model.js";
+import { getProductionHeader } from "../../config/midtransHeaderConfig.config.js";
+import generateOrderId from "../../utils/generateOrderId.util.js";
 
 const axiosConfig = {
   headers: getProductionHeader(),
@@ -64,7 +63,7 @@ const generatePaymentLink = async (responseData) => {
 
     if (payment_method.length) data.enabled_payments = payment_method;
 
-    const res = await axios.post(
+    const res = await post(
       "https://api.midtrans.com/v1/payment-links",
       data,
       axiosConfig
@@ -81,8 +80,10 @@ const generatePaymentLink = async (responseData) => {
       order_id: userOrderId,
       credit_amount: credit,
     });
+    console.log(responseData.message.chat.id);
 
     const user = await User.findById(responseData.message.chat.id);
+    console.log(user);
     user.transaction_history.push(transaction);
     await transaction.save();
     await user.save();
@@ -93,4 +94,4 @@ const generatePaymentLink = async (responseData) => {
   }
 };
 
-module.exports = generatePaymentLink;
+export default generatePaymentLink;

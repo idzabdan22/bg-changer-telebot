@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const mainController = require("../controllers/main.controller");
+import { Router } from "express";
+const router = Router();
+import * as mainController from "../controllers/main.controller.js";
 
 router.route("/").get(mainController.index).post(mainController.handleTelegram);
 
-module.exports = router;
+export default router;

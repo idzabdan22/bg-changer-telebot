@@ -141,10 +141,10 @@
 // //   .png()
 // //   .toBuffer();
 
-const MainFunc = require("./function/main");
-const fs = require("fs");
+import { imageResizer } from "./function/main";
+import { writeFileSync } from "fs";
 
-MainFunc.imageResizer("./photos/a.jpeg", 500, 500).then((data) => {
+imageResizer("./photos/a.jpeg", 500, 500).then((data) => {
   console.log(data);
-  fs.writeFileSync("./photos/a-resized.jpg", data);
+  writeFileSync("./photos/a-resized.jpg", data);
 });

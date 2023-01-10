@@ -1,9 +1,9 @@
-const sendDocument = require("./sendDocTele");
-const sendPhoto = require("./sendPhotoTele");
-const sendMessage = require("./sendMessageTele");
-const getTelegramFilePath = require("./getTeleFilePath");
+import sendDocument from "./sendDocTele.js";
+import sendPhoto from "./sendPhotoTele.js";
+import sendMessage from "./sendMessageTele.js";
+import getTelegramFilePath from "./getTeleFilePath.js";
 
-module.exports = {
+export {
   sendDocument,
   sendPhoto,
   sendMessage,

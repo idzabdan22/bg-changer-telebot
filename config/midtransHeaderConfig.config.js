@@ -1,4 +1,5 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const headerConfig = {
   "Content-Type": "application/json",
@@ -15,7 +16,7 @@ const getProductionHeader = () => {
   return headerConfig;
 };
 
-module.exports = {
+export {
   getSandBoxHeader,
   getProductionHeader,
 };

@@ -1,5 +1,5 @@
-const { History, User } = require("../../model/index.model");
-const TFunc = require("../telegram");
+import { History, User } from "../../model/index.model.js";
+import { sendMessage, getTelegramFilePath } from "../telegram/index.js";
 
 const processDocOrPhotoData = async (data) => {
   try {
@@ -12,21 +12,22 @@ const processDocOrPhotoData = async (data) => {
           validType.includes(data.message.document.mime_type))
       )
     ) {
-      await TFunc.sendMessage({
+      await sendMessage({
         chat_id: id,
         text: "Oops, that is not i expected...",
       });
 
-      await TFunc.sendMessage({
+      await sendMessage({
         chat_id: id,
         text: "Try again, sending file within these format: JPEG, PNG, JPG.",
       });
+
     } else {
       const photoArr = data.message.photo;
-      file_id = !photoArr
+      const file_id = !photoArr
         ? data.message.document.file_id
         : data.message.photo[photoArr.length - 1].file_id;
-      const file_url = await TFunc.getTelegramFilePath(file_id);
+      const file_url = await getTelegramFilePath(file_id);
       const file_type = !photoArr ? "document" : "photo";
 
       const userHistory = new History({
@@ -38,12 +39,14 @@ const processDocOrPhotoData = async (data) => {
       });
 
       await userHistory.save();
-      console.log(userHistory);
+
       const user = await User.findById(id);
+
       user.history.push(userHistory);
+
       await user.save();
 
-      await TFunc.sendMessage({
+      await sendMessage({
         chat_id: id,
         text: "Choose our favorite backround color below:",
         reply_markup: {
@@ -79,14 +82,16 @@ const processDocOrPhotoData = async (data) => {
           ],
         },
       });
-      await TFunc.sendMessage({
+
+      await sendMessage({
         chat_id: id,
         text: "Or type the hex color code (ex: 81d4fa, fff).",
       });
+      
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = processDocOrPhotoData;
+export default processDocOrPhotoData;

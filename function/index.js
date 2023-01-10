@@ -1,17 +1,17 @@
-const sendDocument = require("./sendDocTele");
-const sendPhoto = require("./sendPhotoTele");
-const removeBackground = require("./removeBackground");
-const getTelegramFilePath = require("./getTeleFilePath");
-const sendMessage = require("./sendMessageTele");
-const callbackQueryHandler = require("./callbackQueryHandler");
-const checkUser = require("./checkUser");
-const registerUser = require("./registerUser");
-const apiKeyGenerator = require("./apikeyChanger");
-const processCommand = require("./processCommand");
-const processDocOrPhotoData = require("./processDocOrPhotoData");
-const paymentHandling = require("./paymentHandling");
+import sendDocument from "./sendDocTele";
+import sendPhoto from "./sendPhotoTele";
+import removeBackground from "./removeBackground";
+import getTelegramFilePath from "./getTeleFilePath";
+import sendMessage from "./sendMessageTele";
+import callbackQueryHandler from "./callbackQueryHandler";
+import checkUser from "./checkUser";
+import registerUser from "./registerUser";
+import apiKeyGenerator from "./apikeyChanger";
+import processCommand from "./processCommand";
+import processDocOrPhotoData from "./processDocOrPhotoData";
+import paymentHandling from "./paymentHandling";
 
-module.exports = {
+export default {
   sendDocument,
   sendPhoto,
   sendMessage,
