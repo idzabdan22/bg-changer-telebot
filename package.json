@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "16.17.0",
-    "npm": "8.15.0"
+    "node": "16.19.4",
+    "npm": "9.3.0"
   },
   "type": "module",
   "author": "abdan",
