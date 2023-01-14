@@ -23,6 +23,9 @@ const userSchema = new Schema({
   language_code: {
     type: String,
   },
+  joined_at: {
+    type: Date
+  },
   history: [{ type: Schema.Types.ObjectId, ref: "History" }],
   transaction_history: [{ type: Schema.Types.ObjectId, ref: "Transaction" }],
 });

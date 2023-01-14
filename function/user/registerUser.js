@@ -20,6 +20,7 @@ const registerUser = async (userData) => {
       credit: 5,
       is_bot: is_bot,
       language_code: language_code,
+      joined_at: new Date(),
     });
 
     return await user.save();

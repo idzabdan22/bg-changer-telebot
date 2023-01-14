@@ -16,11 +16,11 @@ connect(process.env.DB || "mongodb://127.0.0.1:27017/bg-changer-telebot")
 
 const seedDB = async () => {
   // await Apikey.deleteMany({});
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 100; index++) {
     const randomNum = Math.floor(Math.random() * 6);
     const api_key = new Apikey({
       key: uuidv4(),
-      api_credit: randomNum,
+      api_credit: 50,
     });
     await api_key.save();
     // const user = new User({
@@ -33,6 +33,7 @@ const seedDB = async () => {
     // });
     // await user.save();
   }
+  console.log("finish");
 };
 
 seedDB();
