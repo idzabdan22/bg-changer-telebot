@@ -1,3 +1,6 @@
 node_modules/
 .env
-*.txt
+catatan.txt
+home.txt
+midtrans.txt
+MyAPI.txt
