@@ -1,6 +1,6 @@
 import { Apikey } from "../../model/index.model.js";
 
-const apiKeyGenerator = async () => {
+export default async () => {
   try {
     const res = await Apikey.find({
       api_credit: { $gt: 0 },
@@ -10,5 +10,3 @@ const apiKeyGenerator = async () => {
     throw error;
   }
 };
-
-export default apiKeyGenerator;

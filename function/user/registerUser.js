@@ -1,7 +1,6 @@
-import checkUser from "./checkUser.js";
 import { User } from "../../model/index.model.js";
 
-const registerUser = async (userData) => {
+export default async (userData) => {
   try {
     const {
       id,
@@ -28,4 +27,3 @@ const registerUser = async (userData) => {
     throw err;
   }
 };
-export default registerUser;

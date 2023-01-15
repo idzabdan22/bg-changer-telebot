@@ -16,12 +16,9 @@ import paymentRouter from "./router/payment.router.js";
 
 const dbUrl = process.env.DB;
 
-// console.log(dbUrl);
-
 connect(dbUrl)
-  .then((res) => {
+  .then(() => {
     console.log("Success Connect to MongoDB");
-    // console.log(res)
   })
   .catch((err) => {
     console.log("Failed Connect to MongoDB", err);
@@ -34,13 +31,14 @@ app.use("/", mainRouter);
 app.use("/payment", paymentRouter);
 
 app.all("*", (req, res, next) => {
-  // next(new ExpressError("Page Not Found", 404));
+  next(new ExpressError("Page Not Found", 404));
 });
 
 app.use((err, req, res, next) => {
+  console.log(err);
   const { status = 500 } = err;
   if (!err.message) err.message = "Oh no, Something went wrong!";
-  res.status(status).render("error", { err });
+  res.status(status).send({ err });
 });
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => {

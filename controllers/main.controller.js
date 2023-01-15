@@ -9,7 +9,7 @@ import apiChecker from "../function/rbg_api/apiChecker.js";
 const index = (req, res) => {
   try {
     res.status(200).send({
-      message: "OK, There is nothing to do...",
+      message: "OK, there is nothing to do...",
     });
   } catch (error) {
     res.status(500).send({ message: "internal server error" });
