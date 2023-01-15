@@ -1,6 +1,6 @@
 import axios from "axios";
 const { post } = axios;
-import { User, Transaction} from "../../model/index.model.js";
+import { User, Transaction } from "../../model/index.model.js";
 import { getProductionHeader } from "../../config/midtransHeaderConfig.config.js";
 import generateOrderId from "../../utils/generateOrderId.util.js";
 
@@ -8,7 +8,7 @@ const axiosConfig = {
   headers: getProductionHeader(),
 };
 
-const generatePaymentLink = async (responseData) => {
+export default async (responseData) => {
   try {
     const userId = responseData.from.id;
     let amount = 0;
@@ -93,5 +93,3 @@ const generatePaymentLink = async (responseData) => {
     throw error;
   }
 };
-
-export default generatePaymentLink;

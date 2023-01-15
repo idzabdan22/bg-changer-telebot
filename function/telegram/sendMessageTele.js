@@ -3,7 +3,7 @@ const { post } = axios;import CustomError from "../../utils/CustomError.util.js"
 import dotenv from "dotenv";
 dotenv.config();
 
-const sendMessage = async (data) => {
+export default async (data) => {
   try {
     const res = await post(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/sendMessage`,
@@ -15,4 +15,3 @@ const sendMessage = async (data) => {
   }
 };
 
-export default sendMessage;

@@ -1,15 +1,21 @@
 import axios from "axios";
 import FormData from "form-data";
-import CustomError from "../../utils/CustomError.util.js";
 import dotenv from "dotenv";
 dotenv.config();
+import fs from "fs";
+import path from "path";
 const { post } = axios;
 
-const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
+export default async (img_file_path, bg_color, apiKey) => {
   try {
     const formData = new FormData();
     formData.append("size", "auto");
-    formData.append("image_url", imgURL);
+    formData.append(
+      "image_file",
+      fs.createReadStream(img_file_path),
+      path.basename(img_file_path)
+    );
+    // formData.append("image_url", "https://www.remove.bg/example.jpg");
     if (!(bg_color === "transparent")) {
       formData.append("bg_color", bg_color);
     }
@@ -24,6 +30,7 @@ const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
     });
     return res.data;
   } catch (error) {
+    console.log(error);
     console.log("ERROR DI REMOVE BACKGROUND");
     // let msg = "";
     // switch (error.response.) {
@@ -44,5 +51,3 @@ const backroundChangeProcess = async (imgURL, bg_color, apiKey) => {
     return false;
   }
 };
-
-export default backroundChangeProcess;

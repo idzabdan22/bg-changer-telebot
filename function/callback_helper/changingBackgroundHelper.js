@@ -9,14 +9,17 @@ import Path from "path";
 import { generatePaymentLink } from "../payment/index.js";
 import { userCreditCheck } from "../user/index.js";
 import imageResizer from "../main/imageResizer.js";
+import imageDownloader from "../../utils/imageDownloader.js";
 import probe from "probe-image-size";
 import dotenv from "dotenv";
 dotenv.config();
+import sharp from "sharp";
 
 export default async (cbId, id, callbackData, messageText) => {
+  console.log(cbId);
   if (!(await userCreditCheck(id))) {
     // && !isBuying
-
+    console.log("test");
     if (cbId) {
       await post(
         `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
@@ -27,10 +30,12 @@ export default async (cbId, id, callbackData, messageText) => {
     }
     return;
   }
+
   await sendMessage({
     chat_id: id,
     text: "Processing, it may take a while...",
   });
+
   const bg_color = callbackData || messageText;
   const user = await User.findById(id);
   const history = await History.findById(user.history[user.history.length - 1]);
@@ -61,32 +66,40 @@ export default async (cbId, id, callbackData, messageText) => {
     history.file_url.length
   );
 
-  const path = `${process.cwd()}/photos/${new Date()}.${file_extension}`;
+  let path = "";
 
-  const apiKey = await apiKeyGenerator();
-  const api_data = await Apikey.findById(apiKey._id);
+  if (bg_color === "transparent") {
+    path = `${process.cwd()}/photos/${id}.png`;
+  } else {
+    path = `${process.cwd()}/photos/${id}.${file_extension}`;
+  }
 
-  console.log(api_data);
-
-  const bufferData = await removeBackground(
+  await imageDownloader(
     `https://api.telegram.org/file/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/${history.file_url}`,
-    bg_color,
-    api_data.key
+    path
   );
 
-  api_data.api_credit--;
+  const apiKey = await apiKeyGenerator();
+  // const api_data = await Apikey.findById(apiKey._id);
 
-  await api_data.save();
+  const bufferData = await removeBackground(
+    path,
+    bg_color,
+    "FdSZyfLmRduhYyDyfvH1Xau2"
+  );
+
+  // api_data.api_credit--;
+
+  // await api_data.save();
 
   if (bufferData) {
     const { width, height } = await probe(
       `https://api.telegram.org/file/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/${history.file_url}`
     );
     await imageResizer(bufferData, path, width, height);
-    //   console.log(status);
-    //   // fs.writeFileSync(path, bufferData);
-    //   // const data = await sharp(path).resize(2048).toBuffer();
-    //   // // fs.writeFileSync(path, data);
+    // fs.writeFileSync(path, bufferData);
+    // const data = await sharp(path).resize(width*height).toBuffer();
+    // fs.writeFileSync(path, data);
   }
 
   history.file_type === "document"
@@ -96,22 +109,32 @@ export default async (cbId, id, callbackData, messageText) => {
   user.credit--;
 
   if (historySaveStatus) {
-    console.log("SAVE STATUS, CALLBACK BARU");
     await history.save();
   }
   await user.save();
 
-  // fs.unlink(path, (err) => {
-  //   if (err) return console.log(err);
-  // });
-
   if (cbId) {
-    await post(
-      `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
-      {
-        callback_query_id: cbId,
-      }
-    );
+    // await post(
+    //   `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/editMessageReplyMarkup`,
+    //   {
+    //     message_id: message_id,
+    //   }
+    // );
+    try {
+      await post(
+        `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/answerCallbackQuery`,
+        {
+          callback_query_id: cbId,
+          cache_time: 0,
+        }
+      );
+    } catch (error) {
+      console.log("Error di callback query");
+    }
+
+    // fs.unlink(path, (err) => {
+    //   if (err) return console.log(err);
+    // });
   }
   return;
 };

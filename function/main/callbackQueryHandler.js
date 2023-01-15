@@ -5,14 +5,17 @@ import changingBackgroundHelper from "../callback_helper/changingBackgroundHelpe
 import showTransactionHistory from "../user/showTransactionHistory.js";
 import showHistory from "../user/showHistory.js";
 
-const callbackQueryHandler = async (response) => {
+export default async (response) => {
   try {
     if (!response) return;
     const cbId = response?.id;
     const id = response.message.chat.id;
     const callbackData = response?.data;
     const messageText = response.message.text;
+    const messageId = response.message.message_id;
     let isBuying = false;
+
+    console.log(response);
 
     if (
       callbackData === "gp2k" ||
@@ -25,6 +28,7 @@ const callbackQueryHandler = async (response) => {
     } else if (callbackData === "/tHistory") {
       await showTransactionHistory(id);
     } else {
+      console.log(callbackData);
       await changingBackgroundHelper(cbId, id, callbackData, messageText);
     }
     return;
@@ -34,4 +38,3 @@ const callbackQueryHandler = async (response) => {
   }
 };
 
-export default callbackQueryHandler;

@@ -1,12 +1,12 @@
 import { User } from "../../model/index.model.js";
-import * as TFunc from "../telegram/index.js";
+import { sendMessage } from "../telegram/index.js";
 
-const userInfo = async (userId) => {
+export default async (userId) => {
   try {
     const user = await User.findById(userId);
     const userInfoTemplate = `Here your's user info:\nuser_id: ${user._id}\nusername: ${user.username}\ncredit: ${user.credit}\nfirst_name: ${user.first_name}\nlast_name: ${user.last_name}\nlanguage: ${user.language_code}
     `;
-    await TFunc.sendMessage({
+    await sendMessage({
       chat_id: userId,
       text: userInfoTemplate,
       reply_markup: {
@@ -24,7 +24,7 @@ const userInfo = async (userId) => {
         ],
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 };
-
-export default userInfo;

@@ -1,7 +1,7 @@
 import User from "../../model/user.model.js";
 import { sendMessage } from "../telegram/index.js";
 
-const userCreditCheck = async (id) => {
+export default async (id) => {
   try {
     const isCreditAvailable = await User.findById(id);
     if (!isCreditAvailable.credit > 0) {
@@ -18,4 +18,3 @@ const userCreditCheck = async (id) => {
   }
 };
 
-export default userCreditCheck;

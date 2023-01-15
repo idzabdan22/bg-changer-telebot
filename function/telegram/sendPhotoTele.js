@@ -7,7 +7,7 @@ import CustomError from "../../utils/CustomError.util.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const sendPhoto = async (chat_id, local_file_path) => {
+export default async (chat_id, local_file_path) => {
   try {
     const teleForm = new FormData();
     teleForm.append("chat_id", chat_id);
@@ -26,7 +26,6 @@ const sendPhoto = async (chat_id, local_file_path) => {
   }
 };
 
-export default sendPhoto;
 
 //   .then((response) => {
 // fs.unlink(path, (err) => {

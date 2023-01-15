@@ -1,13 +1,13 @@
 import callbackQueryHandler from "./callbackQueryHandler.js";
 import { buyCredit } from "../payment/index.js";
 import { checkUser, userInfo } from "../user/index.js";
-import { sendMessage } from "../telegram/index.js";
+import { sendMessage, setBotCommand } from "../telegram/index.js";
 
-const processCommand = async (chatData) => {
+export default async (chatData) => {
   try {
+    console.log(chatData);
     const message = chatData.message.text;
     const id = chatData.message.from.id;
-    // console.log(chatData);
     if (message.match(new RegExp("/[a-zA-Z]+"))) {
       switch (message) {
         case "/start":
@@ -20,6 +20,7 @@ const processCommand = async (chatData) => {
             chat_id: id,
             text: "Send me an image with 10 MB of maximum file size",
           });
+          await setBotCommand();
           break;
         case "/info":
           await userInfo(id);
@@ -27,12 +28,12 @@ const processCommand = async (chatData) => {
         case "/history":
           // await userHistory(id);
           break;
-        case "/buyCredit":
+        case "/buy_credit":
           await buyCredit(id);
           break;
-        case "/transactionStatus":
+        case "/transaction_status":
           break;
-        case "/aboutThisBot":
+        case "/about_this_bot":
           break;
         default:
           break;
@@ -43,9 +44,6 @@ const processCommand = async (chatData) => {
       }
     }
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
-
-export default processCommand;

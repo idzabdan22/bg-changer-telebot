@@ -1,7 +1,7 @@
 import { History, User } from "../../model/index.model.js";
 import { sendMessage, getTelegramFilePath } from "../telegram/index.js";
 
-const processDocOrPhotoData = async (data) => {
+export default async (data) => {
   try {
     const id = data.message.chat.id;
     const validType = ["image/jpeg", "image/png", "image/jpg"];
@@ -94,4 +94,3 @@ const processDocOrPhotoData = async (data) => {
   }
 };
 
-export default processDocOrPhotoData;

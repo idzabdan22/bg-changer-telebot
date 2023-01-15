@@ -7,7 +7,7 @@ import CustomError from "../../utils/CustomError.util.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const sendDocument = async (chat_id, local_file_path) => {
+export default async (chat_id, local_file_path) => {
   try {
     const teleForm = new FormData();
     teleForm.append("chat_id", chat_id);
@@ -22,9 +22,7 @@ const sendDocument = async (chat_id, local_file_path) => {
     );
     return res.status;
   } catch (error) {
-    // console.log(error);
     throw new CustomError("Telegram Server Error", 500);
   }
 };
 
-export default sendDocument;

@@ -4,7 +4,7 @@ import CustomError from "../../utils/CustomError.util.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const getFilePath = async (file_id) => {
+export default async (file_id) => {
   try {
     const res = await get(
       `https://api.telegram.org/bot${process.env.MAIN_TELE_RBG_BOT_TOKEN}/getFile?file_id=${file_id}`
@@ -15,4 +15,3 @@ const getFilePath = async (file_id) => {
   }
 };
 
-export default getFilePath;

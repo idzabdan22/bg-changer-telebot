@@ -1,21 +1,6 @@
 import sharp from "sharp";
 
-// const imageResizer = async (inputPath, width, height) => {
-//   try {
-//     const data = await sharp(inputPath)
-//       .resize(width, height, {
-//         fit: "cover",
-//       })
-//       .toBuffer();
-//     console.log("SUCCESS", data);
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//     return false;
-//   }
-// };
-
-const imageResizer = async (buffer, outputPath, width, height) => {
+export default async (buffer, outputPath, width, height) => {
   try {
     await sharp(buffer)
       .resize(width, height, {
@@ -28,5 +13,3 @@ const imageResizer = async (buffer, outputPath, width, height) => {
     throw err;
   }
 };
-
-export default imageResizer;

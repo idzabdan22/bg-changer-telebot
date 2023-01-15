@@ -1,6 +1,6 @@
 import { sendMessage } from "../telegram/index.js";
 
-const buyCredit = async (userId) => {
+export default async (userId) => {
   try {
     await sendMessage({
       chat_id: userId,
@@ -30,5 +30,3 @@ const buyCredit = async (userId) => {
     throw error;
   }
 };
-
-export default buyCredit;
